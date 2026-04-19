@@ -194,7 +194,7 @@ export default function App() {
           <a className="brand" href="#top" aria-label="Sacred Grove Coaching home">
             <img
               className="brand-logo"
-              src={`${assetBase}sg-logo-final.png`}
+              src={`${assetBase}sg-logo-horizontal.svg`}
               alt="Sacred Grove Coaching"
             />
           </a>
