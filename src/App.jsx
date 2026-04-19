@@ -122,10 +122,133 @@ const processItems = [
   },
 ];
 
+const bookingLinks = {
+  coachingSession: "https://calendar.app.google/V8sKiLacsoy6jXfo7",
+  discoveryCall: "https://calendar.app.google/S2ogPCSRovj9YMeh7",
+};
+
+const sessionOptions = [
+  {
+    icon: "notice",
+    label: "Start here",
+    title: "Free discovery call",
+    duration: "30 minutes",
+    href: bookingLinks.discoveryCall,
+    action: "Book the free call",
+    copy:
+      "A gentle first conversation to share what is bringing you here, ask questions, and decide whether coaching feels like the right kind of support.",
+    details: [
+      "Talk through what feels heavy or unclear right now.",
+      "Learn how Karissa approaches grief, transition, and burnout coaching.",
+      "Decide together whether to continue with a full coaching session.",
+    ],
+  },
+  {
+    icon: "steps",
+    label: "Continue",
+    title: "One-on-one coaching session",
+    duration: "60 minutes",
+    href: bookingLinks.coachingSession,
+    action: "Book a full session",
+    copy:
+      "A private Zoom session for slowing down, naming what is happening, and choosing a next step that fits your real life and capacity.",
+    details: [
+      "Bring grief, transition, burnout, or the question you cannot quite name.",
+      "Leave with language for what is true and one grounded next step.",
+      "If ongoing support would help, choose a simple rhythm together.",
+    ],
+  },
+];
+
+const faqItems = [
+  {
+    question: "Do I need to know exactly what I want to work on?",
+    answer:
+      "No. Many clients begin with a tender, unfinished sense that something has shifted. We can start there.",
+  },
+  {
+    question: "Is this therapy?",
+    answer:
+      "No. Coaching is not diagnosis, trauma treatment, or clinical mental health care. It can support your present-life choices and sit alongside therapy when that is appropriate.",
+  },
+  {
+    question: "Where do sessions happen?",
+    answer:
+      "Sessions are offered virtually by Zoom, so you can join from a private place that feels steady and comfortable.",
+  },
+  {
+    question: "Will I be pushed to move on from grief?",
+    answer:
+      "No. The work is paced gently. Grief is honored as part of your life, while we look for ways to carry it with more support.",
+  },
+];
+
+const testimonials = [
+  {
+    takeaway: "Care that feels safe",
+    quote: (
+      <>
+        Karissa shows up with{" "}
+        <strong className="testimonial-emphasis">so much care, presence, and intention</strong>.
+        She creates a space that feels{" "}
+        <strong className="testimonial-emphasis">genuinely safe</strong>, where I can unpack my
+        deepest thoughts and feelings without hesitation. Every session with her feels like{" "}
+        <strong className="testimonial-emphasis">a breath of fresh air</strong>, like a weight I
+        didn't even realize I was carrying, gets lifted and helps me find my way through it. She is
+        an incredible coach.
+      </>
+    ),
+    name: "Avital",
+    date: "March 30, 2026",
+    dateTime: "2026-03-30",
+  },
+  {
+    takeaway: "Grounded, judgment-free support",
+    quote: (
+      <>
+        Working with Karissa has been such a{" "}
+        <strong className="testimonial-emphasis">grounding experience</strong>. She creates a space
+        that feels{" "}
+        <strong className="testimonial-emphasis">safe, supportive, and completely free of judgment</strong>.
+        Karissa is deeply empathetic and has a real gift for helping me process intense feelings in
+        a way that feels{" "}
+        <strong className="testimonial-emphasis">manageable rather than overwhelming</strong>. She is
+        caring, skilled, and has a steady presence that makes it feel like I'm talking to a friend. I
+        leave our conversations feeling{" "}
+        <strong className="testimonial-emphasis">calmer and more confident</strong> in my next steps.
+      </>
+    ),
+    name: "Stacey",
+    date: "April 12, 2026",
+    dateTime: "2026-04-12",
+  },
+  {
+    takeaway: "Breakthroughs with clarity",
+    quote: (
+      <>
+        Karissa combines{" "}
+        <strong className="testimonial-emphasis">deep compassion with exceptional skill</strong>,
+        creating a space where{" "}
+        <strong className="testimonial-emphasis">genuine transformation and healing</strong> can
+        unfold. Working with her has led to{" "}
+        <strong className="testimonial-emphasis">profound breakthroughs</strong> for me, helping me
+        move forward with{" "}
+        <strong className="testimonial-emphasis">clarity, confidence, and renewed direction</strong>{" "}
+        in both my business and my personal life.
+      </>
+    ),
+    name: "Alyx",
+    date: "April 15, 2026",
+    dateTime: "2026-04-15",
+  },
+];
+
 const navItems = [
   { label: "Who I Help", href: "#support" },
   { label: "Coaching", href: "#coaching" },
+  { label: "Sessions", href: "#sessions" },
   { label: "About", href: "#about" },
+  { label: "Testimonials", href: "#testimonials" },
 ];
 
 const iconShapes = {
@@ -141,12 +264,12 @@ const iconShapes = {
   transition: Butterfly,
 };
 
-function TextIcon({ name, className = "text-icon" }) {
+function TextIcon({ name, className = "text-icon", weight = "duotone" }) {
   const Icon = iconShapes[name] || FlowerLotus;
 
   return (
     <span className={className} aria-hidden="true">
-      <Icon weight="duotone" focusable="false" />
+      <Icon weight={weight} focusable="false" />
     </span>
   );
 }
@@ -186,11 +309,11 @@ export default function App() {
   const pageRef = useRef(null);
   const aboutPhotos = [
     {
-      src: `${assetBase}karissa-coaching-outfit-1.jpg`,
-      alt: "Karissa Yeremin in coaching outfit",
-      focalPoint: "center 18%",
-      width: 640,
-      height: 800,
+      src: `${assetBase}karissa-long-hair.jpg`,
+      alt: "Karissa Yeremin smiling with long colorful braids",
+      focalPoint: "center center",
+      width: 900,
+      height: 1125,
     },
     {
       src: `${assetBase}karissa-portrait.jpeg`,
@@ -346,7 +469,13 @@ export default function App() {
                 </a>
               ))}
             </div>
-            <a className="nav-cta" href="#connect" onClick={closeMenu}>
+            <a
+              className="nav-cta"
+              href={bookingLinks.discoveryCall}
+              target="_blank"
+              rel="noreferrer"
+              onClick={closeMenu}
+            >
               <span>Start Here</span>
               <ButtonIcon icon={ArrowRight} className="button-arrow" />
             </a>
@@ -388,9 +517,14 @@ export default function App() {
                   Sessions are available virtually by Zoom.
                 </p>
                 <div className="hero-actions">
-                  <a className="button button-primary" href="#connect">
+                  <a
+                    className="button button-primary"
+                    href={bookingLinks.discoveryCall}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <ButtonIcon icon={CalendarHeart} weight="duotone" />
-                    <span className="button-label">Book a conversation</span>
+                    <span className="button-label">Book a free discovery call</span>
                     <ButtonIcon icon={ArrowRight} className="button-arrow" />
                   </a>
                   <a className="button button-secondary" href="#coaching">
@@ -400,16 +534,27 @@ export default function App() {
                   </a>
                 </div>
               </div>
-              <aside className="hero-note">
-                <p>
-                  Grief is <strong>not something to fix</strong>. It is
-                  something to honor, make room for, and learn how to live with.
-                </p>
-              </aside>
+              <div className="hero-side">
+                <figure className="hero-portrait">
+                  <img
+                    src={`${assetBase}karissa-coaching-outfit-1.jpg`}
+                    alt="Karissa Yeremin in coaching outfit"
+                    width="640"
+                    height="800"
+                    loading="eager"
+                  />
+                </figure>
+                <aside className="hero-note">
+                  <p>
+                    Grief is <strong>not something to fix</strong>. It is
+                    something to honor, make room for, and learn how to live with.
+                  </p>
+                </aside>
+              </div>
             </div>
           </section>
 
-          <section className="section support-section" id="support" data-reveal>
+          <section className="section support-section" id="support">
             <div className="section-kicker">Who I support</div>
             <div className="support-lead">
               <h2>
@@ -487,37 +632,123 @@ export default function App() {
             </ul>
           </section>
 
-          <section className="section boundary-section">
-            <article data-reveal>
-              <div className="boundary-heading">
-                <TextIcon name="honor" className="boundary-icon" />
-                <div>
-                  <p className="eyebrow">What coaching is</p>
-                  <h3>A partnership.</h3>
-                </div>
-              </div>
+          <section className="section boundary-section" id="scope" data-reveal>
+            <div className="boundary-intro">
+              <p className="eyebrow">Clear scope of care</p>
+              <h2>
+                Coaching gives your present life a place to
+                <span className="title-accent"> breathe</span>.
+              </h2>
               <p>
-                Coaching is <strong>client-led and present-focused</strong>. You
-                bring what you are struggling with or working toward, and
-                together we create a plan that supports the goal you want to move
-                toward.
+                This work is steady, compassionate, and practical. It helps you
+                move with what is here now, while honoring when clinical care is
+                the right support.
               </p>
-            </article>
-            <article data-reveal style={{ "--reveal-delay": "90ms" }}>
-              <div className="boundary-heading">
-                <TextIcon name="notice" className="boundary-icon" />
-                <div>
-                  <p className="eyebrow">What coaching is not</p>
-                  <h3>Therapy.</h3>
+            </div>
+            <div className="boundary-compare">
+              <article className="boundary-card boundary-card-is">
+                <div className="boundary-heading">
+                  <div className="boundary-meta">
+                    <span className="boundary-index" aria-hidden="true">01</span>
+                    <p className="eyebrow">What coaching is</p>
+                  </div>
+                  <h3>A partnership for your next step.</h3>
                 </div>
-              </div>
+                <p>
+                  You bring what you are struggling with or working toward. We
+                  listen, name what matters, and create a plan that supports the
+                  goal you want to move toward.
+                </p>
+                <div className="boundary-note">
+                  Client-led, goal-aware, and paced to your real capacity.
+                </div>
+              </article>
+              <article className="boundary-card boundary-card-not">
+                <div className="boundary-heading">
+                  <div className="boundary-meta">
+                    <span className="boundary-index" aria-hidden="true">02</span>
+                    <p className="eyebrow">What coaching is not</p>
+                  </div>
+                  <h3>Not therapy or clinical care.</h3>
+                </div>
+                <p>
+                  I am <strong>not a therapist</strong>, and this work is not
+                  diagnosis, trauma treatment, or clinical mental health care. If
+                  therapy is the right support, coaching can sit alongside that
+                  care with <strong>clear boundaries</strong>.
+                </p>
+                <div className="boundary-note">
+                  Supportive alongside care, never a replacement for it.
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section className="section sessions-section" id="sessions" data-reveal>
+            <div className="sessions-heading">
+              <SectionSymbol name="steps" className="section-symbol-calm" />
+              <p className="eyebrow">Sessions & fit</p>
+              <h2>
+                Know what you are stepping into
+                <span className="title-accent"> before you book</span>.
+              </h2>
               <p>
-                I am <strong>not a therapist</strong>, and this work is not
-                diagnosis, trauma treatment, or clinical mental health care. If
-                therapy is the right support, coaching can sit alongside that
-                care with <strong>clear boundaries</strong>.
+                A first call is for fit, questions, and a little breathing room.
+                A full session gives us space to listen closely and choose one
+                steady next step.
               </p>
-            </article>
+            </div>
+            <div className="session-options" aria-label="Session options">
+              {sessionOptions.map((option, index) => (
+                <article
+                  className="session-option"
+                  key={option.title}
+                  data-reveal
+                  style={{ "--reveal-delay": `${index * 90}ms` }}
+                >
+                  <div className="session-option-top">
+                    <TextIcon name={option.icon} className="session-option-icon" />
+                    <div>
+                      <p className="session-label">{option.label}</p>
+                      <h3>{option.title}</h3>
+                    </div>
+                    <span className="session-duration">{option.duration}</span>
+                  </div>
+                  <p>{option.copy}</p>
+                  <ul>
+                    {option.details.map((detail) => (
+                      <li key={detail}>
+                        <TextIcon name="signal" className="session-check" />
+                        <span>{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    className="button button-secondary"
+                    href={option.href}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <ButtonIcon icon={CalendarHeart} weight="duotone" />
+                    <span className="button-label">{option.action}</span>
+                    <ButtonIcon icon={ArrowRight} className="button-arrow" />
+                  </a>
+                </article>
+              ))}
+            </div>
+            <div className="session-faq" aria-label="Common questions">
+              {faqItems.map((item, index) => (
+                <article
+                  className="faq-item"
+                  key={item.question}
+                  data-reveal
+                  style={{ "--reveal-delay": `${index * 70}ms` }}
+                >
+                  <h3>{item.question}</h3>
+                  <p>{item.answer}</p>
+                </article>
+              ))}
+            </div>
           </section>
 
           <section className="section process-section" data-reveal>
@@ -554,11 +785,16 @@ export default function App() {
                 way I sit with people, ask questions, and help them feel less
                 alone in hard seasons.
               </p>
-              <blockquote>
-                “Karissa helped me feel <strong>grounded</strong>. She helped
-                me identify what I was feeling without letting those feelings
-                overwhelm me.”
-              </blockquote>
+              <div className="about-anchors" aria-label="Karissa's coaching presence">
+                <div className="about-anchor">
+                  <TextIcon name="honor" className="about-anchor-icon" />
+                  <span>Grief-informed presence that does not rush your story.</span>
+                </div>
+                <div className="about-anchor">
+                  <TextIcon name="notice" className="about-anchor-icon" />
+                  <span>Years of mentoring shaped by listening and clear questions.</span>
+                </div>
+              </div>
             </div>
             <figure className="about-photo" data-reveal style={{ "--reveal-delay": "110ms" }}>
               <div className="about-photo-slider" aria-live="polite">
@@ -613,6 +849,39 @@ export default function App() {
             </figure>
           </section>
 
+          <section className="section testimonials-section" id="testimonials" data-reveal>
+            <div className="testimonials-heading">
+              <p className="eyebrow">Real client words</p>
+              <h2>
+                People leave feeling <span className="title-accent">calmer,
+                clearer, and less alone</span>.
+              </h2>
+            </div>
+            <div className="testimonials-grid">
+              {testimonials.map((testimonial, index) => (
+                <figure
+                  key={`${testimonial.name}-${testimonial.dateTime}`}
+                  className="testimonial-card"
+                  data-reveal
+                  style={{ "--reveal-delay": `${index * 90}ms` }}
+                >
+                  <span className="testimonial-number">0{index + 1}</span>
+                  <p className="testimonial-takeaway">{testimonial.takeaway}</p>
+                  <blockquote>
+                    <p>{testimonial.quote}</p>
+                  </blockquote>
+                  <figcaption>
+                    <span>
+                      <strong>{testimonial.name}</strong>
+                      <span>Dated client note</span>
+                    </span>
+                    <time dateTime={testimonial.dateTime}>{testimonial.date}</time>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+
           <section className="section closing-section" id="connect" data-reveal>
             <div>
               <p className="eyebrow">Start here</p>
@@ -625,11 +894,28 @@ export default function App() {
                 and want a steady place to begin, I would be honored to meet you
                 there. You do not have to have the perfect words before we start.
               </p>
-              <a className="button button-primary button-wide" href="mailto:karissa@example.com">
-                <ButtonIcon icon={EnvelopeSimple} weight="duotone" />
-                <span className="button-label">Book a conversation</span>
-                <ButtonIcon icon={ArrowRight} className="button-arrow" />
-              </a>
+              <div className="booking-actions" aria-label="Booking options">
+                <a
+                  className="button button-primary button-wide"
+                  href={bookingLinks.discoveryCall}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <ButtonIcon icon={CalendarHeart} weight="duotone" />
+                  <span className="button-label">30-minute free discovery call</span>
+                  <ButtonIcon icon={ArrowRight} className="button-arrow" />
+                </a>
+                <a
+                  className="button button-secondary button-wide"
+                  href={bookingLinks.coachingSession}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <ButtonIcon icon={EnvelopeSimple} weight="duotone" />
+                  <span className="button-label">1-hour coaching session</span>
+                  <ButtonIcon icon={ArrowRight} className="button-arrow" />
+                </a>
+              </div>
             </div>
           </section>
         </main>
