@@ -1,4 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <rect width="64" height="64" rx="18" fill="#6E3F35"/>
-  <path d="M18 42.5L31.5 18H34.7L24.5 36.4H46V42.5H18Z" fill="#F8E9D5"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Sacred Grove Coaching tree mark</title>
+  <desc id="desc">Three evergreen trees from the Sacred Grove Coaching logo.</desc>
+  <defs>
+    <linearGradient id="grove" x1="10" y1="14" x2="54" y2="50" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8bc34a" />
+      <stop offset=".48" stop-color="#169f82" />
+      <stop offset="1" stop-color="#0b4f9c" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#fbfaf7" />
+  <g fill="url(#grove)" transform="translate(4 6) scale(.4)">
+    <path d="M69 17L62 31H67L57 47H63L51 65H58L45 83H53L37 105H57V128H68V94H76V128H87V105H107L91 83H99L86 65H93L81 47H87L77 31H82L69 17Z" />
+    <path d="M32 48L25 62H30L20 78H27L14 96H22L5 119H28V128H39V119H58L44 99H50L39 82H45L35 66H40L32 48Z" />
+    <path d="M106 50L99 64H104L94 80H101L88 98H96L80 119H101V128H112V119H134L118 98H126L113 80H120L110 64H115L106 50Z" />
+    <path d="M1 137C21 130 42 126 64 126C89 126 113 130 137 138C111 143 90 145 68 144C45 143 24 141 1 137Z" />
+  </g>
 </svg>

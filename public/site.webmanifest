@@ -1,0 +1,23 @@
+{
+  "name": "Sacred Grove Coaching",
+  "short_name": "Sacred Grove",
+  "description": "Gentle, grounded grief, transition, and burnout coaching for women in midlife.",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "sg-mark.png",
+      "sizes": "292x306",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "theme_color": "#fbfaf7",
+  "background_color": "#fbfaf7",
+  "display": "standalone",
+  "start_url": "."
+}

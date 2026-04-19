@@ -1,42 +1,124 @@
 import { useEffect, useRef, useState } from "react";
+import {
+  ArrowRight,
+  BatteryWarning,
+  Butterfly,
+  CalendarHeart,
+  CompassRose,
+  DoorOpen,
+  EnvelopeSimple,
+  Eye,
+  FlowerLotus,
+  Footprints,
+  HandHeart,
+  HeartBreak,
+  List,
+  Pulse,
+  Signpost,
+  X,
+} from "@phosphor-icons/react";
 
 const supportItems = [
   {
+    icon: "loss",
     title: "Grief & loss",
-    copy: "A person, a relationship, a season, a role, a version of yourself, or the life you thought you would have by now.",
+    copy: (
+      <>
+        A person, a relationship, a season, a role, a version of yourself, or
+        <strong> the life you thought you would have by now</strong>.
+      </>
+    ),
   },
   {
+    icon: "transition",
     title: "Midlife & perimenopause",
-    copy: "Changes in your body, family, faith, work, identity, or direction that have left you wondering who you are becoming.",
+    copy: (
+      <>
+        Changes in your body, family, faith, work, identity, or direction that
+        have left you wondering <em>who you are becoming</em>.
+      </>
+    ),
   },
   {
+    icon: "restore",
     title: "Burnout & overwhelm",
-    copy: "The quiet exhaustion that comes from being capable for everyone else while having very little room for yourself.",
+    copy: (
+      <>
+        The quiet exhaustion that comes from being capable for everyone else
+        while having <strong>very little room for yourself</strong>.
+      </>
+    ),
   },
 ];
 
 const approachItems = [
-  "We honor grief instead of trying to rush past it.",
-  "We notice emotions as signals, not problems to erase.",
-  "We stay present with what is true right now.",
-  "We look for steady next steps that feel possible.",
+  {
+    icon: "honor",
+    copy: (
+      <>
+        We <strong>honor grief</strong> instead of trying to rush past it.
+      </>
+    ),
+  },
+  {
+    icon: "signal",
+    copy: (
+      <>
+        We notice emotions as <strong>signals</strong>, not problems to erase.
+      </>
+    ),
+  },
+  {
+    icon: "presence",
+    copy: (
+      <>
+        We stay present with what is <em>true right now</em>.
+      </>
+    ),
+  },
+  {
+    icon: "steps",
+    copy: (
+      <>
+        We look for <strong>steady next steps</strong> that feel possible.
+      </>
+    ),
+  },
 ];
 
 const processItems = [
   {
+    icon: "arrive",
     number: "01",
     title: "Arrive",
-    copy: "You bring what feels present. You do not need the perfect words or a polished version of your story.",
+    copy: (
+      <>
+        You bring what feels present. You do not need the perfect words or a
+        polished version of your story.
+      </>
+    ),
   },
   {
+    icon: "notice",
     number: "02",
     title: "Notice",
-    copy: "Together we slow down, name what is happening, and make space for emotions without letting them take over.",
+    copy: (
+      <>
+        Together we slow down, name what is happening, and make space for
+        emotions without letting them take over.
+      </>
+    ),
   },
   {
+    icon: "move",
     number: "03",
     title: "Move gently",
-    copy: "We choose a next step that supports your real life, your capacity, and the goal you want to move toward.",
+    copy: (
+      <>
+        We choose a next step that supports your real life, your capacity, and
+        the goal you want to move toward.
+      </>
+    ),
   },
 ];
 
@@ -46,68 +128,51 @@ const navItems = [
   { label: "About", href: "#about" },
 ];
 
-function CalendarIcon() {
+const iconShapes = {
+  arrive: DoorOpen,
+  honor: HandHeart,
+  loss: HeartBreak,
+  move: Signpost,
+  notice: Eye,
+  presence: FlowerLotus,
+  restore: BatteryWarning,
+  signal: Pulse,
+  steps: Footprints,
+  transition: Butterfly,
+};
+
+function TextIcon({ name, className = "text-icon" }) {
+  const Icon = iconShapes[name] || FlowerLotus;
+
   return (
-    <svg className="button-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
-      <path d="M5.6 3.2v2.4" />
-      <path d="M14.4 3.2v2.4" />
-      <path d="M4.1 7.4h11.8" />
-      <rect x="3.3" y="4.8" width="13.4" height="12" rx="2.2" />
-      <path d="m7.2 12.2 1.7 1.7 3.7-4" />
-    </svg>
+    <span className={className} aria-hidden="true">
+      <Icon weight="duotone" focusable="false" />
+    </span>
   );
 }
 
-function CompassIcon() {
-  return (
-    <svg className="button-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
-      <circle cx="10" cy="10" r="6.8" />
-      <path d="m12.6 7.4-1.4 4-3.8 1.2 1.4-3.8 3.8-1.4Z" />
-    </svg>
-  );
+function ButtonIcon({ icon: Icon, className = "button-icon", weight = "regular" }) {
+  return <Icon className={className} weight={weight} aria-hidden="true" focusable="false" />;
 }
 
-function MailIcon() {
+function SectionSymbol({ name, className = "" }) {
   return (
-    <svg className="button-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
-      <rect x="3.2" y="5.2" width="13.6" height="9.6" rx="2" />
-      <path d="m4.2 6.5 5.8 4.3 5.8-4.3" />
-    </svg>
-  );
-}
-
-function MenuIcon() {
-  return (
-    <svg className="menu-toggle-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
-      <path d="M4 6.2h12" />
-      <path d="M4 10h12" />
-      <path d="M4 13.8h12" />
-    </svg>
-  );
-}
-
-function CloseIcon() {
-  return (
-    <svg className="menu-toggle-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
-      <path d="m5.5 5.5 9 9" />
-      <path d="m14.5 5.5-9 9" />
-    </svg>
-  );
-}
-
-function ArrowRightIcon() {
-  return (
-    <svg className="button-arrow" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
-      <path d="M4.8 10h9.4" />
-      <path d="m10.8 6.2 3.8 3.8-3.8 3.8" />
-    </svg>
+    <span className={`section-symbol ${className}`} aria-hidden="true">
+      <TextIcon name={name} className="section-symbol-icon" />
+    </span>
   );
 }
 
 function BrandLogo({ assetBase }) {
   return (
     <span className="brand-logo" aria-hidden="true">
-      <img className="brand-mark" src={`${assetBase}sg-mark.png`} alt="" />
+      <img
+        className="brand-mark"
+        src={`${assetBase}sg-mark.png`}
+        alt=""
+        width="292"
+        height="306"
+      />
       <span className="brand-wordmark">
         <span className="brand-name">Sacred Grove</span>
         <span className="brand-subtitle">Coaching</span>
@@ -124,11 +189,15 @@ export default function App() {
       src: `${assetBase}karissa-coaching-outfit-1.jpg`,
       alt: "Karissa Yeremin in coaching outfit",
       focalPoint: "center 18%",
+      width: 640,
+      height: 800,
     },
     {
       src: `${assetBase}karissa-portrait.jpeg`,
       alt: "Karissa Yeremin smiling outdoors",
       focalPoint: "center 34%",
+      width: 400,
+      height: 400,
     },
   ];
   const [aboutPhotoIndex, setAboutPhotoIndex] = useState(0);
@@ -263,7 +332,11 @@ export default function App() {
             onClick={() => setIsMenuOpen((isOpen) => !isOpen)}
           >
             <span>{isMenuOpen ? "Close" : "Menu"}</span>
-            {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
+            {isMenuOpen ? (
+              <ButtonIcon icon={X} className="menu-toggle-icon" />
+            ) : (
+              <ButtonIcon icon={List} className="menu-toggle-icon" />
+            )}
           </button>
           <nav className="site-nav" id="primary-menu" aria-label="Primary">
             <div className="site-nav-links">
@@ -275,7 +348,7 @@ export default function App() {
             </div>
             <a className="nav-cta" href="#connect" onClick={closeMenu}>
               <span>Start Here</span>
-              <ArrowRightIcon />
+              <ButtonIcon icon={ArrowRight} className="button-arrow" />
             </a>
           </nav>
           <button
@@ -294,6 +367,9 @@ export default function App() {
                 className="hero-background-image"
                 src={`${assetBase}hero-background.svg`}
                 alt=""
+                width="1600"
+                height="700"
+                fetchpriority="high"
               />
               <div className="hero-light-field" />
               <div className="hero-grain" />
@@ -303,31 +379,31 @@ export default function App() {
               <div className="hero-copy">
                 <p className="eyebrow">Grief, transition, and burnout coaching</p>
                 <h1>
-                  You can come exactly as you are.
+                  You can come <span className="title-accent">exactly as you are.</span>
                 </h1>
                 <p className="hero-body">
-                  I offer a gentle, grounded coaching space for women in midlife
-                  who are carrying grief, loss, transition, or burnout and want
-                  support finding their next steady step. Sessions are available
-                  virtually by Zoom.
+                  I offer a <strong>gentle, grounded coaching space</strong> for
+                  women in midlife who are carrying grief, loss, transition, or
+                  burnout and want support finding their next steady step.
+                  Sessions are available virtually by Zoom.
                 </p>
                 <div className="hero-actions">
                   <a className="button button-primary" href="#connect">
-                    <CalendarIcon />
+                    <ButtonIcon icon={CalendarHeart} weight="duotone" />
                     <span className="button-label">Book a conversation</span>
-                    <ArrowRightIcon />
+                    <ButtonIcon icon={ArrowRight} className="button-arrow" />
                   </a>
                   <a className="button button-secondary" href="#coaching">
-                    <CompassIcon />
+                    <ButtonIcon icon={CompassRose} weight="duotone" />
                     <span className="button-label">Learn how coaching works</span>
-                    <ArrowRightIcon />
+                    <ButtonIcon icon={ArrowRight} className="button-arrow" />
                   </a>
                 </div>
               </div>
               <aside className="hero-note">
                 <p>
-                  Grief is not something to fix. It is something to honor, make
-                  room for, and learn how to live with.
+                  Grief is <strong>not something to fix</strong>. It is
+                  something to honor, make room for, and learn how to live with.
                 </p>
               </aside>
             </div>
@@ -338,7 +414,7 @@ export default function App() {
             <div className="support-lead">
               <h2>
                 This is for the woman who looks like she is holding it together,
-                but inside feels tender, tired, or changed.
+                but inside feels <span className="title-accent">tender, tired, or changed</span>.
               </h2>
               <p>
                 You may not even know exactly what to call what you are going
@@ -354,7 +430,13 @@ export default function App() {
                   data-reveal
                   style={{ "--reveal-delay": `${index * 90}ms` }}
                 >
-                  <h3>{item.title}</h3>
+                  <div className="support-item-header">
+                    <TextIcon name={item.icon} className="support-icon" />
+                    <div>
+                      <span className="support-index">0{index + 1}</span>
+                      <h3>{item.title}</h3>
+                    </div>
+                  </div>
                   <p>{item.copy}</p>
                 </article>
               ))}
@@ -362,16 +444,17 @@ export default function App() {
           </section>
 
           <section className="section belief-section" data-reveal>
-            <div>
+            <div className="belief-heading">
+              <SectionSymbol name="signal" />
               <p className="eyebrow">What I believe</p>
-              <h2>Your emotions are not the enemy.</h2>
+              <h2>Your emotions are <span className="title-accent">not the enemy</span>.</h2>
             </div>
             <div className="belief-copy">
               <p>
-                I believe there are no “bad” emotions. Emotions are signals.
-                They help us notice what is happening in our inner world, and
-                they are often connected to how we are experiencing life in our
-                bodies, relationships, and choices.
+                I believe there are no <strong>“bad” emotions</strong>. Emotions
+                are <strong>signals</strong>. They help us notice what is
+                happening in our inner world, and they are often connected to how
+                we are experiencing life in our bodies, relationships, and choices.
               </p>
               <p>
                 In coaching, we make room for those emotions without treating
@@ -383,17 +466,22 @@ export default function App() {
 
           <section className="section approach-section" id="coaching" data-reveal>
             <div className="approach-copy">
+              <SectionSymbol name="presence" className="section-symbol-calm" />
               <p className="eyebrow">How I support you</p>
-              <h2>A safe space to be present, tell the truth, and choose what comes next.</h2>
+              <h2>
+                A safe space to be <span className="title-accent">present</span>,
+                tell the truth, and choose what comes next.
+              </h2>
             </div>
             <ul className="approach-list">
               {approachItems.map((item, index) => (
                 <li
-                  key={item}
+                  key={`approach-${index}`}
                   data-reveal
                   style={{ "--reveal-delay": `${index * 70}ms` }}
                 >
-                  {item}
+                  <TextIcon name={item.icon} className="list-icon" />
+                  <span>{item.copy}</span>
                 </li>
               ))}
             </ul>
@@ -401,22 +489,33 @@ export default function App() {
 
           <section className="section boundary-section">
             <article data-reveal>
-              <p className="eyebrow">What coaching is</p>
-              <h3>A partnership.</h3>
+              <div className="boundary-heading">
+                <TextIcon name="honor" className="boundary-icon" />
+                <div>
+                  <p className="eyebrow">What coaching is</p>
+                  <h3>A partnership.</h3>
+                </div>
+              </div>
               <p>
-                Coaching is client-led and present-focused. You bring what you
-                are struggling with or working toward, and together we create a
-                plan that supports the goal you want to move toward.
+                Coaching is <strong>client-led and present-focused</strong>. You
+                bring what you are struggling with or working toward, and
+                together we create a plan that supports the goal you want to move
+                toward.
               </p>
             </article>
             <article data-reveal style={{ "--reveal-delay": "90ms" }}>
-              <p className="eyebrow">What coaching is not</p>
-              <h3>Therapy.</h3>
+              <div className="boundary-heading">
+                <TextIcon name="notice" className="boundary-icon" />
+                <div>
+                  <p className="eyebrow">What coaching is not</p>
+                  <h3>Therapy.</h3>
+                </div>
+              </div>
               <p>
-                I am not a therapist, and this work is not diagnosis, trauma
-                treatment, or clinical mental health care. If therapy is the
-                right support, coaching can sit alongside that care with clear
-                boundaries.
+                I am <strong>not a therapist</strong>, and this work is not
+                diagnosis, trauma treatment, or clinical mental health care. If
+                therapy is the right support, coaching can sit alongside that
+                care with <strong>clear boundaries</strong>.
               </p>
             </article>
           </section>
@@ -431,7 +530,9 @@ export default function App() {
                   data-reveal
                   style={{ "--reveal-delay": `${index * 90}ms` }}
                 >
-                  <span>{item.number}</span>
+                  <div className="process-meta">
+                    <span className="process-number">{item.number}</span>
+                  </div>
                   <h3>{item.title}</h3>
                   <p>{item.copy}</p>
                 </article>
@@ -442,7 +543,10 @@ export default function App() {
           <section className="section about-section" id="about">
             <div className="about-copy" data-reveal>
               <p className="eyebrow">Why Karissa</p>
-              <h2>I know what it means to walk with grief and still keep living.</h2>
+              <h2>
+                I know what it means to walk with grief and
+                <span className="title-accent"> still keep living</span>.
+              </h2>
               <p>
                 My own experiences with grief are part of why I care so deeply
                 about this work. I am empathetic, steady, and a good listener.
@@ -451,8 +555,9 @@ export default function App() {
                 alone in hard seasons.
               </p>
               <blockquote>
-                “Karissa helped me feel grounded. She helped me identify what I
-                was feeling without letting those feelings overwhelm me.”
+                “Karissa helped me feel <strong>grounded</strong>. She helped
+                me identify what I was feeling without letting those feelings
+                overwhelm me.”
               </blockquote>
             </div>
             <figure className="about-photo" data-reveal style={{ "--reveal-delay": "110ms" }}>
@@ -466,6 +571,9 @@ export default function App() {
                       key={photo.src}
                       src={photo.src}
                       alt={photo.alt}
+                      width={photo.width}
+                      height={photo.height}
+                      loading="lazy"
                       style={{ objectPosition: photo.focalPoint }}
                     />
                   ))}
@@ -508,16 +616,19 @@ export default function App() {
           <section className="section closing-section" id="connect" data-reveal>
             <div>
               <p className="eyebrow">Start here</p>
-              <h2>You do not have to know exactly what to say before you reach out.</h2>
+              <h2>
+                You do not have to know <span className="title-accent">exactly
+                what to say</span> before you reach out.
+              </h2>
               <p>
-                If you are carrying grief, transition, or burnout and want a
-                steady place to begin, I would be honored to meet you there.
-                You do not have to have the perfect words before we start.
+                If you are carrying <strong>grief, transition, or burnout</strong>
+                and want a steady place to begin, I would be honored to meet you
+                there. You do not have to have the perfect words before we start.
               </p>
               <a className="button button-primary button-wide" href="mailto:karissa@example.com">
-                <MailIcon />
+                <ButtonIcon icon={EnvelopeSimple} weight="duotone" />
                 <span className="button-label">Book a conversation</span>
-                <ArrowRightIcon />
+                <ButtonIcon icon={ArrowRight} className="button-arrow" />
               </a>
             </div>
           </section>
