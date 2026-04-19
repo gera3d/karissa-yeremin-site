@@ -40,6 +40,12 @@ const processItems = [
   },
 ];
 
+const navItems = [
+  { label: "Who I Help", href: "#support" },
+  { label: "Coaching", href: "#coaching" },
+  { label: "About", href: "#about" },
+];
+
 function CalendarIcon() {
   return (
     <svg className="button-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
@@ -70,12 +76,43 @@ function MailIcon() {
   );
 }
 
+function MenuIcon() {
+  return (
+    <svg className="menu-toggle-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+      <path d="M4 6.2h12" />
+      <path d="M4 10h12" />
+      <path d="M4 13.8h12" />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg className="menu-toggle-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+      <path d="m5.5 5.5 9 9" />
+      <path d="m14.5 5.5-9 9" />
+    </svg>
+  );
+}
+
 function ArrowRightIcon() {
   return (
     <svg className="button-arrow" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
       <path d="M4.8 10h9.4" />
       <path d="m10.8 6.2 3.8 3.8-3.8 3.8" />
     </svg>
+  );
+}
+
+function BrandLogo({ assetBase }) {
+  return (
+    <span className="brand-logo" aria-hidden="true">
+      <img className="brand-mark" src={`${assetBase}sg-mark.png`} alt="" />
+      <span className="brand-wordmark">
+        <span className="brand-name">Sacred Grove</span>
+        <span className="brand-subtitle">Coaching</span>
+      </span>
+    </span>
   );
 }
 
@@ -86,17 +123,24 @@ export default function App() {
     {
       src: `${assetBase}karissa-coaching-outfit-1.jpg`,
       alt: "Karissa Yeremin in coaching outfit",
+      focalPoint: "center 18%",
     },
     {
       src: `${assetBase}karissa-portrait.jpeg`,
       alt: "Karissa Yeremin smiling outdoors",
+      focalPoint: "center 34%",
     },
   ];
   const [aboutPhotoIndex, setAboutPhotoIndex] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const showPreviousPhoto = () => {
     setAboutPhotoIndex((currentIndex) =>
       currentIndex === 0 ? aboutPhotos.length - 1 : currentIndex - 1
     );
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
   };
   const showNextPhoto = () => {
     setAboutPhotoIndex((currentIndex) =>
@@ -187,23 +231,60 @@ export default function App() {
     };
   }, []);
 
+  useEffect(() => {
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") {
+        closeMenu();
+      }
+    };
+
+    window.addEventListener("keydown", closeOnEscape);
+    document.body.classList.toggle("nav-open", isMenuOpen);
+
+    return () => {
+      window.removeEventListener("keydown", closeOnEscape);
+      document.body.classList.remove("nav-open");
+    };
+  }, [isMenuOpen]);
+
   return (
     <div className="page" ref={pageRef}>
       <div className="site-shell">
-        <header className="site-header">
+        <header className={`site-header${isMenuOpen ? " is-menu-open" : ""}`}>
           <a className="brand" href="#top" aria-label="Sacred Grove Coaching home">
-            <img
-              className="brand-logo"
-              src={`${assetBase}sg-logo-final-highres.png`}
-              alt="Sacred Grove Coaching"
-            />
+            <BrandLogo assetBase={assetBase} />
           </a>
-          <nav className="site-nav" aria-label="Primary">
-            <a href="#support">Who I Help</a>
-            <a href="#coaching">Coaching</a>
-            <a href="#about">About</a>
-            <a href="#connect">Start Here</a>
+          <button
+            className="menu-toggle"
+            type="button"
+            aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-controls="primary-menu"
+            aria-expanded={isMenuOpen}
+            onClick={() => setIsMenuOpen((isOpen) => !isOpen)}
+          >
+            <span>{isMenuOpen ? "Close" : "Menu"}</span>
+            {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
+          </button>
+          <nav className="site-nav" id="primary-menu" aria-label="Primary">
+            <div className="site-nav-links">
+              {navItems.map((item) => (
+                <a key={item.href} href={item.href} onClick={closeMenu}>
+                  {item.label}
+                </a>
+              ))}
+            </div>
+            <a className="nav-cta" href="#connect" onClick={closeMenu}>
+              <span>Start Here</span>
+              <ArrowRightIcon />
+            </a>
           </nav>
+          <button
+            className="menu-scrim"
+            type="button"
+            aria-label="Close navigation menu"
+            tabIndex={isMenuOpen ? 0 : -1}
+            onClick={closeMenu}
+          />
         </header>
 
         <main id="top">
@@ -214,9 +295,7 @@ export default function App() {
                 src={`${assetBase}hero-background.svg`}
                 alt=""
               />
-              <div className="hero-leaf-veil" />
               <div className="hero-light-field" />
-              <div className="hero-sunbeam" />
               <div className="hero-grain" />
             </div>
 
@@ -383,7 +462,12 @@ export default function App() {
                   style={{ transform: `translateX(-${aboutPhotoIndex * 100}%)` }}
                 >
                   {aboutPhotos.map((photo) => (
-                    <img key={photo.src} src={photo.src} alt={photo.alt} />
+                    <img
+                      key={photo.src}
+                      src={photo.src}
+                      alt={photo.alt}
+                      style={{ objectPosition: photo.focalPoint }}
+                    />
                   ))}
                 </div>
               </div>
