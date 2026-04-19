@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="sky" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#fffdf7"/>
+      <stop offset="42%" stop-color="#eef6e7"/>
+      <stop offset="100%" stop-color="#b9d9cf"/>
+    </linearGradient>
+    <linearGradient id="canopy" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#ddefd0"/>
+      <stop offset="48%" stop-color="#93c86a"/>
+      <stop offset="100%" stop-color="#0b6f7e"/>
+    </linearGradient>
+    <linearGradient id="shadow" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#0d3245"/>
+      <stop offset="54%" stop-color="#07846f"/>
+      <stop offset="100%" stop-color="#89bb39"/>
+    </linearGradient>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.74" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0.042"/>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+  <rect width="1600" height="700" fill="url(#sky)"/>
+  <path d="M0 406 C194 366 339 430 540 389 C727 351 894 345 1086 303 C1280 260 1439 274 1600 222 L1600 700 L0 700 Z" fill="url(#canopy)" opacity="0.27"/>
+  <path d="M0 495 C216 442 397 512 611 466 C803 425 965 423 1172 378 C1335 342 1484 347 1600 302 L1600 700 L0 700 Z" fill="#0b6f7e" opacity="0.14"/>
+  <path d="M0 598 C226 548 391 607 611 558 C804 515 988 526 1196 476 C1368 435 1494 446 1600 408 L1600 700 L0 700 Z" fill="url(#shadow)" opacity="0.18"/>
+  <path d="M1078 415 L1129 280 L1180 415 Z M1154 423 L1206 250 L1264 423 Z M1241 428 L1287 304 L1335 428 Z M1322 432 L1386 224 L1455 432 Z M1434 438 L1484 292 L1538 438 Z" fill="#0d3245" opacity="0.08"/>
+  <path d="M1112 428 L1158 309 L1204 428 Z M1196 438 L1242 293 L1292 438 Z M1280 446 L1325 328 L1371 446 Z M1395 451 L1439 327 L1484 451 Z" fill="#07846f" opacity="0.09"/>
+  <rect width="1600" height="700" filter="url(#grain)" opacity="1"/>
+</svg>
