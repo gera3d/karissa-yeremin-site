@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import {
   ArrowRight,
   BatteryWarning,
-  Butterfly,
   CalendarHeart,
   CompassRose,
   DoorOpen,
@@ -25,17 +24,7 @@ const supportItems = [
     copy: (
       <>
         A person, a relationship, a season, a role, a version of yourself, or
-        <strong> the life you thought you would have by now</strong>.
-      </>
-    ),
-  },
-  {
-    icon: "transition",
-    title: "Midlife & perimenopause",
-    copy: (
-      <>
-        Changes in your body, family, faith, work, identity, or direction that
-        have left you wondering <em>who you are becoming</em>.
+        <strong> the life you thought you would have</strong>.
       </>
     ),
   },
@@ -44,8 +33,8 @@ const supportItems = [
     title: "Burnout & overwhelm",
     copy: (
       <>
-        The quiet exhaustion that comes from being capable for everyone else
-        while having <strong>very little room for yourself</strong>.
+        A quiet, steady exhaustion from holding so much for so long, without a
+        place to put it down.
       </>
     ),
   },
@@ -57,14 +46,6 @@ const approachItems = [
     copy: (
       <>
         We <strong>honor grief</strong> instead of trying to rush past it.
-      </>
-    ),
-  },
-  {
-    icon: "signal",
-    copy: (
-      <>
-        We notice emotions as <strong>signals</strong>, not problems to erase.
       </>
     ),
   },
@@ -104,8 +85,8 @@ const processItems = [
     title: "Notice",
     copy: (
       <>
-        Together we slow down, name what is happening, and make space for
-        emotions without letting them take over.
+        Together we slow down, name what is happening, and make room for what
+        needs honest attention.
       </>
     ),
   },
@@ -124,17 +105,17 @@ const processItems = [
 
 const bookingLinks = {
   coachingSession: "https://calendar.app.google/V8sKiLacsoy6jXfo7",
-  discoveryCall: "https://calendar.app.google/S2ogPCSRovj9YMeh7",
+  connectionCall: "https://calendar.app.google/S2ogPCSRovj9YMeh7",
 };
 
 const sessionOptions = [
   {
     icon: "notice",
     label: "Start here",
-    title: "Free discovery call",
+    title: "Connection call",
     duration: "30 minutes",
-    href: bookingLinks.discoveryCall,
-    action: "Book the free call",
+    href: bookingLinks.connectionCall,
+    action: "Book a Connection Call",
     copy:
       "A gentle first conversation to share what is bringing you here, ask questions, and decide whether coaching feels like the right kind of support.",
     details: [
@@ -151,7 +132,7 @@ const sessionOptions = [
     href: bookingLinks.coachingSession,
     action: "Book a full session",
     copy:
-      "A private Zoom session for slowing down, naming what is happening, and choosing a next step that fits your real life and capacity.",
+      "A private Google Meet session for slowing down, naming what is happening, and choosing a next step that fits your real life and capacity.",
     details: [
       "Bring grief, transition, burnout, or the question you cannot quite name.",
       "Leave with language for what is true and one grounded next step.",
@@ -174,7 +155,7 @@ const faqItems = [
   {
     question: "Where do sessions happen?",
     answer:
-      "Sessions are offered virtually by Zoom, so you can join from a private place that feels steady and comfortable.",
+      "Sessions are offered virtually through Google Meet, so you can join from a private place that feels steady and comfortable.",
   },
   {
     question: "Will I be pushed to move on from grief?",
@@ -244,7 +225,7 @@ const testimonials = [
 ];
 
 const navItems = [
-  { label: "Who I Help", href: "#support" },
+  { label: "Who This Is For", href: "#support" },
   { label: "Coaching", href: "#coaching" },
   { label: "Sessions", href: "#sessions" },
   { label: "About", href: "#about" },
@@ -261,7 +242,6 @@ const iconShapes = {
   restore: BatteryWarning,
   signal: Pulse,
   steps: Footprints,
-  transition: Butterfly,
 };
 
 function TextIcon({ name, className = "text-icon", weight = "duotone" }) {
@@ -471,7 +451,7 @@ export default function App() {
             </div>
             <a
               className="nav-cta"
-              href={bookingLinks.discoveryCall}
+              href={bookingLinks.connectionCall}
               target="_blank"
               rel="noreferrer"
               onClick={closeMenu}
@@ -511,20 +491,20 @@ export default function App() {
                   You can come <span className="title-accent">exactly as you are.</span>
                 </h1>
                 <p className="hero-body">
-                  I offer a <strong>gentle, grounded coaching space</strong> for
-                  women in midlife who are carrying grief, loss, transition, or
-                  burnout and want support finding their next steady step.
-                  Sessions are available virtually by Zoom.
+                  I create a <strong>grounded, supportive coaching space</strong>{" "}
+                  where individuals can feel seen, heard, and held as they
+                  navigate life's challenges. Sessions are available virtually
+                  through Google Meet.
                 </p>
                 <div className="hero-actions">
                   <a
                     className="button button-primary"
-                    href={bookingLinks.discoveryCall}
+                    href={bookingLinks.connectionCall}
                     target="_blank"
                     rel="noreferrer"
                   >
                     <ButtonIcon icon={CalendarHeart} weight="duotone" />
-                    <span className="button-label">Book a free discovery call</span>
+                    <span className="button-label">Book a Connection Call</span>
                     <ButtonIcon icon={ArrowRight} className="button-arrow" />
                   </a>
                   <a className="button button-secondary" href="#coaching">
@@ -555,16 +535,17 @@ export default function App() {
           </section>
 
           <section className="section support-section" id="support">
-            <div className="section-kicker">Who I support</div>
+            <div className="section-kicker">This Space Is For</div>
             <div className="support-lead">
               <h2>
-                This is for the woman who looks like she is holding it together,
-                but inside feels <span className="title-accent">tender, tired, or changed</span>.
+                This is for the person who can hold it all together on the
+                outside, but knows something deeper is asking for attention.{" "}
+                <span className="title-accent">Not to be fixed - but to be witnessed.</span>
               </h2>
               <p>
-                You may not even know exactly what to call what you are going
-                through. You just know something has shifted, and you need a
-                safe place to be honest about it.
+                You may not have the language for what you're moving through.
+                Only the sense that something within you has shifted, and you're
+                ready to meet it differently.
               </p>
             </div>
             <div className="support-grid">
@@ -585,27 +566,6 @@ export default function App() {
                   <p>{item.copy}</p>
                 </article>
               ))}
-            </div>
-          </section>
-
-          <section className="section belief-section" data-reveal>
-            <div className="belief-heading">
-              <SectionSymbol name="signal" />
-              <p className="eyebrow">What I believe</p>
-              <h2>Your emotions are <span className="title-accent">not the enemy</span>.</h2>
-            </div>
-            <div className="belief-copy">
-              <p>
-                I believe there are no <strong>“bad” emotions</strong>. Emotions
-                are <strong>signals</strong>. They help us notice what is
-                happening in our inner world, and they are often connected to how
-                we are experiencing life in our bodies, relationships, and choices.
-              </p>
-              <p>
-                In coaching, we make room for those emotions without treating
-                them like something shameful or broken. We listen, get curious,
-                and look for what support might help you feel more grounded.
-              </p>
             </div>
           </section>
 
@@ -897,12 +857,12 @@ export default function App() {
               <div className="booking-actions" aria-label="Booking options">
                 <a
                   className="button button-primary button-wide"
-                  href={bookingLinks.discoveryCall}
+                  href={bookingLinks.connectionCall}
                   target="_blank"
                   rel="noreferrer"
                 >
                   <ButtonIcon icon={CalendarHeart} weight="duotone" />
-                  <span className="button-label">30-minute free discovery call</span>
+                  <span className="button-label">Book a Connection Call</span>
                   <ButtonIcon icon={ArrowRight} className="button-arrow" />
                 </a>
                 <a
