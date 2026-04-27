@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import {
   ArrowRight,
   BatteryWarning,
@@ -12,8 +13,12 @@ import {
   HandHeart,
   HeartBreak,
   List,
+  Pause,
+  Play,
   Pulse,
   Signpost,
+  SpeakerHigh,
+  Waveform,
   X,
 } from "@phosphor-icons/react";
 
@@ -40,72 +45,31 @@ const supportItems = [
   },
 ];
 
-const approachItems = [
-  {
-    icon: "honor",
-    copy: (
-      <>
-        We <strong>honor grief</strong> instead of trying to rush past it.
-      </>
-    ),
-  },
-  {
-    icon: "presence",
-    copy: (
-      <>
-        We stay present with what is <em>true right now</em>.
-      </>
-    ),
-  },
-  {
-    icon: "steps",
-    copy: (
-      <>
-        We look for <strong>steady next steps</strong> that feel possible.
-      </>
-    ),
-  },
-];
-
-const processItems = [
-  {
-    icon: "arrive",
-    number: "01",
-    title: "Arrive",
-    copy: (
-      <>
-        You bring what feels present. You do not need the perfect words or a
-        polished version of your story.
-      </>
-    ),
-  },
-  {
-    icon: "notice",
-    number: "02",
-    title: "Notice",
-    copy: (
-      <>
-        Together we slow down, name what is happening, and make room for what
-        needs honest attention.
-      </>
-    ),
-  },
-  {
-    icon: "move",
-    number: "03",
-    title: "Move gently",
-    copy: (
-      <>
-        We choose a next step that supports your real life, your capacity, and
-        the goal you want to move toward.
-      </>
-    ),
-  },
-];
-
 const bookingLinks = {
   coachingSession: "https://calendar.app.google/V8sKiLacsoy6jXfo7",
   connectionCall: "https://calendar.app.google/S2ogPCSRovj9YMeh7",
+};
+
+const getPaymentLink = (envKey, previewLink) =>
+  import.meta.env[envKey] || (import.meta.env.DEV ? previewLink : "");
+
+const paymentLinks = {
+  individualSession: getPaymentLink(
+    "VITE_STRIPE_INDIVIDUAL_SESSION_LINK",
+    "https://buy.stripe.com/test_00wcN74Zccqg5tG8lgfEk00"
+  ),
+  fourSessionPackage: getPaymentLink(
+    "VITE_STRIPE_FOUR_SESSION_PACKAGE_LINK",
+    "https://buy.stripe.com/test_eVq9AV63g9e45tG30WfEk01"
+  ),
+  sixSessionPackage: getPaymentLink(
+    "VITE_STRIPE_SIX_SESSION_PACKAGE_LINK",
+    "https://buy.stripe.com/test_3cI14p4Zc4XOe0c9pkfEk02"
+  ),
+  customAmount: getPaymentLink(
+    "VITE_STRIPE_CUSTOM_AMOUNT_LINK",
+    "https://buy.stripe.com/test_9B6eVfcrE1LCe0c9pkfEk03"
+  ),
 };
 
 const sessionOptions = [
@@ -113,16 +77,11 @@ const sessionOptions = [
     icon: "notice",
     label: "Start here",
     title: "Connection call",
-    duration: "30 minutes",
+    duration: "20 minutes",
     href: bookingLinks.connectionCall,
     action: "Book a Connection Call",
     copy:
-      "A gentle first conversation to share what is bringing you here, ask questions, and decide whether coaching feels like the right kind of support.",
-    details: [
-      "Talk through what feels heavy or unclear right now.",
-      "Learn how Karissa approaches grief, transition, and burnout coaching.",
-      "Decide together whether to continue with a full coaching session.",
-    ],
+      "This complimentary 20-minute call is a chance for us to connect and explore what's bringing you here. You don't need to have the right words; just come as you are. There's no pressure to move forward, just space to feel into what you need and how I might be able to support you.",
   },
   {
     icon: "steps",
@@ -132,37 +91,67 @@ const sessionOptions = [
     href: bookingLinks.coachingSession,
     action: "Book a full session",
     copy:
-      "A private Google Meet session for slowing down, naming what is happening, and choosing a next step that fits your real life and capacity.",
-    details: [
-      "Bring grief, transition, burnout, or the question you cannot quite name.",
-      "Leave with language for what is true and one grounded next step.",
-      "If ongoing support would help, choose a simple rhythm together.",
-    ],
+      "This 60-minute coaching session is designed to support you through grief, transition, or overwhelm. This is a space to pause, reflect, and reconnect with yourself, and then move forward in a way that feels grounded and aligned with who you are.",
   },
 ];
 
-const faqItems = [
+const paymentOptions = [
   {
-    question: "Do I need to know exactly what I want to work on?",
-    answer:
-      "No. Many clients begin with a tender, unfinished sense that something has shifted. We can start there.",
+    icon: "presence",
+    label: "Single session",
+    title: "Individual coaching session",
+    price: "$100",
+    detail: "One 60-minute virtual coaching session with Karissa.",
+    href: paymentLinks.individualSession,
+    action: "Pay for one session",
   },
   {
-    question: "Is this therapy?",
-    answer:
-      "No. Coaching is not diagnosis, trauma treatment, or clinical mental health care. It can support your present-life choices and sit alongside therapy when that is appropriate.",
+    icon: "steps",
+    label: "Package",
+    title: "Four-session package",
+    price: "$375",
+    detail: "Four 60-minute virtual sessions for ongoing support.",
+    href: paymentLinks.fourSessionPackage,
+    action: "Pay for four sessions",
   },
   {
-    question: "Where do sessions happen?",
-    answer:
-      "Sessions are offered virtually through Google Meet, so you can join from a private place that feels steady and comfortable.",
+    icon: "honor",
+    label: "Package",
+    title: "Six-session package",
+    price: "$550",
+    detail: "Six 60-minute virtual sessions for deeper continuity.",
+    href: paymentLinks.sixSessionPackage,
+    action: "Pay for six sessions",
   },
   {
-    question: "Will I be pushed to move on from grief?",
-    answer:
-      "No. The work is paced gently. Grief is honored as part of your life, while we look for ways to carry it with more support.",
+    icon: "restore",
+    label: "Sliding scale",
+    title: "Other amount",
+    price: "Custom",
+    detail: "Use this after Karissa has agreed to a sliding-scale or adjusted amount.",
+    href: paymentLinks.customAmount,
+    action: "Pay a custom amount",
   },
 ];
+
+function PaymentButton({ href, children }) {
+  if (!href) {
+    return (
+      <span className="button button-primary button-disabled" aria-disabled="true">
+        <ButtonIcon icon={HandHeart} className="button-icon" weight="duotone" />
+        <span className="button-label">Payment link pending</span>
+      </span>
+    );
+  }
+
+  return (
+    <a className="button button-primary" href={href} target="_blank" rel="noreferrer">
+      <ButtonIcon icon={HandHeart} className="button-icon" weight="duotone" />
+      <span className="button-label">{children}</span>
+      <ButtonIcon icon={ArrowRight} className="button-arrow" />
+    </a>
+  );
+}
 
 const testimonials = [
   {
@@ -225,11 +214,11 @@ const testimonials = [
 ];
 
 const navItems = [
-  { label: "Who This Is For", href: "#support" },
-  { label: "Coaching", href: "#coaching" },
-  { label: "Sessions", href: "#sessions" },
-  { label: "About", href: "#about" },
-  { label: "Testimonials", href: "#testimonials" },
+  { label: "Who This Is For", href: "/#support" },
+  { label: "Coaching", href: "/#scope" },
+  { label: "About", href: "/#about" },
+  { label: "Testimonials", href: "/#testimonials" },
+  { label: "Current Clients", href: "/clients" },
 ];
 
 const iconShapes = {
@@ -258,11 +247,66 @@ function ButtonIcon({ icon: Icon, className = "button-icon", weight = "regular" 
   return <Icon className={className} weight={weight} aria-hidden="true" focusable="false" />;
 }
 
-function SectionSymbol({ name, className = "" }) {
+function HeroAudioButton({ src }) {
+  const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) {
+      return undefined;
+    }
+
+    const markPlaying = () => setIsPlaying(true);
+    const markPaused = () => setIsPlaying(false);
+    const handleEnded = () => {
+      audio.currentTime = 0;
+      setIsPlaying(false);
+    };
+
+    audio.addEventListener("play", markPlaying);
+    audio.addEventListener("pause", markPaused);
+    audio.addEventListener("ended", handleEnded);
+
+    return () => {
+      audio.removeEventListener("play", markPlaying);
+      audio.removeEventListener("pause", markPaused);
+      audio.removeEventListener("ended", handleEnded);
+    };
+  }, []);
+
+  const togglePlayback = async () => {
+    const audio = audioRef.current;
+    if (!audio) {
+      return;
+    }
+
+    if (isPlaying) {
+      audio.pause();
+      return;
+    }
+
+    try {
+      await audio.play();
+    } catch {
+      setIsPlaying(false);
+    }
+  };
+
   return (
-    <span className={`section-symbol ${className}`} aria-hidden="true">
-      <TextIcon name={name} className="section-symbol-icon" />
-    </span>
+    <>
+      <audio ref={audioRef} preload="metadata" src={src} />
+      <button
+        className={`button button-secondary${isPlaying ? " is-playing" : ""}`}
+        type="button"
+        onClick={togglePlayback}
+      >
+        <ButtonIcon icon={isPlaying ? Waveform : Play} weight={isPlaying ? "duotone" : "fill"} />
+        <span className="button-label">
+          {isPlaying ? "Pause message" : "Hear a message from Karissa"}
+        </span>
+      </button>
+    </>
   );
 }
 
@@ -289,10 +333,10 @@ export default function App() {
   const pageRef = useRef(null);
   const aboutPhotos = [
     {
-      src: `${assetBase}karissa-long-hair.jpg`,
-      alt: "Karissa Yeremin smiling with long colorful braids",
+      src: `${assetBase}karissa-ponytail.jpg`,
+      alt: "Karissa Yeremin smiling with a colorful ponytail",
       focalPoint: "center center",
-      width: 900,
+      width: 844,
       height: 1125,
     },
     {
@@ -423,7 +467,7 @@ export default function App() {
     <div className="page" ref={pageRef}>
       <div className="site-shell">
         <header className={`site-header${isMenuOpen ? " is-menu-open" : ""}`}>
-          <a className="brand" href="#top" aria-label="Sacred Grove Coaching home">
+          <a className="brand" href="/" aria-label="Sacred Grove Coaching home">
             <BrandLogo assetBase={assetBase} />
           </a>
           <button
@@ -468,8 +512,14 @@ export default function App() {
             onClick={closeMenu}
           />
         </header>
+      </div>
 
-        <main id="top">
+      <Routes>
+        <Route path="/" element={
+          <>
+            <div className="site-shell" style={{ paddingTop: 0 }}>
+              <main id="top">
+
           <section className="hero">
             <div className="hero-atmosphere" aria-hidden="true">
               <img
@@ -488,7 +538,8 @@ export default function App() {
               <div className="hero-copy">
                 <p className="eyebrow">Grief, transition, and burnout coaching</p>
                 <h1>
-                  You can come <span className="title-accent">exactly as you are.</span>
+                  You can come{" "}
+                  <span className="title-accent">exactly as you are.</span>
                 </h1>
                 <p className="hero-body">
                   I create a <strong>grounded, supportive coaching space</strong>{" "}
@@ -507,21 +558,19 @@ export default function App() {
                     <span className="button-label">Book a Connection Call</span>
                     <ButtonIcon icon={ArrowRight} className="button-arrow" />
                   </a>
-                  <a className="button button-secondary" href="#coaching">
-                    <ButtonIcon icon={CompassRose} weight="duotone" />
-                    <span className="button-label">Learn how coaching works</span>
-                    <ButtonIcon icon={ArrowRight} className="button-arrow" />
-                  </a>
+                  <HeroAudioButton src={`${assetBase}honoring-grief-living-with-intention.mp3`} />
                 </div>
               </div>
               <div className="hero-side">
                 <figure className="hero-portrait">
                   <img
-                    src={`${assetBase}karissa-coaching-outfit-1.jpg`}
-                    alt="Karissa Yeremin in coaching outfit"
-                    width="640"
-                    height="800"
+                    src={`${assetBase}karissa-ponytail.jpg`}
+                    alt="Karissa Yeremin smiling with a colorful ponytail"
+                    width="844"
+                    height="1125"
                     loading="eager"
+                    fetchpriority="high"
+                    decoding="async"
                   />
                 </figure>
                 <aside className="hero-note">
@@ -567,44 +616,10 @@ export default function App() {
                 </article>
               ))}
             </div>
-          </section>
 
-          <section className="section approach-section" id="coaching" data-reveal>
-            <div className="approach-copy">
-              <SectionSymbol name="presence" className="section-symbol-calm" />
-              <p className="eyebrow">How I support you</p>
-              <h2>
-                A safe space to be <span className="title-accent">present</span>,
-                tell the truth, and choose what comes next.
-              </h2>
-            </div>
-            <ul className="approach-list">
-              {approachItems.map((item, index) => (
-                <li
-                  key={`approach-${index}`}
-                  data-reveal
-                  style={{ "--reveal-delay": `${index * 70}ms` }}
-                >
-                  <TextIcon name={item.icon} className="list-icon" />
-                  <span>{item.copy}</span>
-                </li>
-              ))}
-            </ul>
           </section>
 
           <section className="section boundary-section" id="scope" data-reveal>
-            <div className="boundary-intro">
-              <p className="eyebrow">Clear scope of care</p>
-              <h2>
-                Coaching gives your present life a place to
-                <span className="title-accent"> breathe</span>.
-              </h2>
-              <p>
-                This work is steady, compassionate, and practical. It helps you
-                move with what is here now, while honoring when clinical care is
-                the right support.
-              </p>
-            </div>
             <div className="boundary-compare">
               <article className="boundary-card boundary-card-is">
                 <div className="boundary-heading">
@@ -615,13 +630,11 @@ export default function App() {
                   <h3>A partnership for your next step.</h3>
                 </div>
                 <p>
-                  You bring what you are struggling with or working toward. We
-                  listen, name what matters, and create a plan that supports the
-                  goal you want to move toward.
+                  Coaching is a compassionate partnership that helps you feel
+                  seen, understood, and supported as you navigate life. Together,
+                  we focus on your present experiences and future goals, helping
+                  you create meaningful change at your own pace.
                 </p>
-                <div className="boundary-note">
-                  Client-led, goal-aware, and paced to your real capacity.
-                </div>
               </article>
               <article className="boundary-card boundary-card-not">
                 <div className="boundary-heading">
@@ -632,104 +645,16 @@ export default function App() {
                   <h3>Not therapy or clinical care.</h3>
                 </div>
                 <p>
-                  I am <strong>not a therapist</strong>, and this work is not
-                  diagnosis, trauma treatment, or clinical mental health care. If
-                  therapy is the right support, coaching can sit alongside that
-                  care with <strong>clear boundaries</strong>.
+                  I am <strong>not a therapist</strong>. Coaching is not a space
+                  for diagnosis, treatment, or clinical mental health care. It is
+                  not a replacement for therapy, but coaching can work alongside
+                  therapy.
                 </p>
-                <div className="boundary-note">
-                  Supportive alongside care, never a replacement for it.
-                </div>
               </article>
             </div>
           </section>
 
-          <section className="section sessions-section" id="sessions" data-reveal>
-            <div className="sessions-heading">
-              <SectionSymbol name="steps" className="section-symbol-calm" />
-              <p className="eyebrow">Sessions & fit</p>
-              <h2>
-                Know what you are stepping into
-                <span className="title-accent"> before you book</span>.
-              </h2>
-              <p>
-                A first call is for fit, questions, and a little breathing room.
-                A full session gives us space to listen closely and choose one
-                steady next step.
-              </p>
-            </div>
-            <div className="session-options" aria-label="Session options">
-              {sessionOptions.map((option, index) => (
-                <article
-                  className="session-option"
-                  key={option.title}
-                  data-reveal
-                  style={{ "--reveal-delay": `${index * 90}ms` }}
-                >
-                  <div className="session-option-top">
-                    <TextIcon name={option.icon} className="session-option-icon" />
-                    <div>
-                      <p className="session-label">{option.label}</p>
-                      <h3>{option.title}</h3>
-                    </div>
-                    <span className="session-duration">{option.duration}</span>
-                  </div>
-                  <p>{option.copy}</p>
-                  <ul>
-                    {option.details.map((detail) => (
-                      <li key={detail}>
-                        <TextIcon name="signal" className="session-check" />
-                        <span>{detail}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <a
-                    className="button button-secondary"
-                    href={option.href}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <ButtonIcon icon={CalendarHeart} weight="duotone" />
-                    <span className="button-label">{option.action}</span>
-                    <ButtonIcon icon={ArrowRight} className="button-arrow" />
-                  </a>
-                </article>
-              ))}
-            </div>
-            <div className="session-faq" aria-label="Common questions">
-              {faqItems.map((item, index) => (
-                <article
-                  className="faq-item"
-                  key={item.question}
-                  data-reveal
-                  style={{ "--reveal-delay": `${index * 70}ms` }}
-                >
-                  <h3>{item.question}</h3>
-                  <p>{item.answer}</p>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="section process-section" data-reveal>
-            <div className="section-kicker">How coaching works</div>
-            <div className="process-grid">
-              {processItems.map((item, index) => (
-                <article
-                  key={item.number}
-                  className="process-item"
-                  data-reveal
-                  style={{ "--reveal-delay": `${index * 90}ms` }}
-                >
-                  <div className="process-meta">
-                    <span className="process-number">{item.number}</span>
-                  </div>
-                  <h3>{item.title}</h3>
-                  <p>{item.copy}</p>
-                </article>
-              ))}
-            </div>
-          </section>
+          
 
           <section className="section about-section" id="about">
             <div className="about-copy" data-reveal>
@@ -770,6 +695,7 @@ export default function App() {
                       width={photo.width}
                       height={photo.height}
                       loading="lazy"
+                      decoding="async"
                       style={{ objectPosition: photo.focalPoint }}
                     />
                   ))}
@@ -813,8 +739,11 @@ export default function App() {
             <div className="testimonials-heading">
               <p className="eyebrow">Real client words</p>
               <h2>
-                People leave feeling <span className="title-accent">calmer,
-                clearer, and less alone</span>.
+                People leave feeling{" "}
+                <span className="title-accent">
+                  calmer, clearer, and less alone
+                </span>
+                .
               </h2>
             </div>
             <div className="testimonials-grid">
@@ -841,45 +770,115 @@ export default function App() {
               ))}
             </div>
           </section>
+              </main>
+            </div>
 
-          <section className="section closing-section" id="connect" data-reveal>
-            <div>
-              <p className="eyebrow">Start here</p>
-              <h2>
-                You do not have to know <span className="title-accent">exactly
-                what to say</span> before you reach out.
-              </h2>
-              <p>
-                If you are carrying <strong>grief, transition, or burnout</strong>
-                and want a steady place to begin, I would be honored to meet you
-                there. You do not have to have the perfect words before we start.
-              </p>
-              <div className="booking-actions" aria-label="Booking options">
-                <a
-                  className="button button-primary button-wide"
-                  href={bookingLinks.connectionCall}
-                  target="_blank"
-                  rel="noreferrer"
+      <section className="closing-section" id="connect" data-reveal>
+        <div className="closing-inner">
+          <p className="eyebrow">Start here</p>
+          <h2>
+            You do not have to know{" "}
+            <span className="title-accent">exactly what to say</span>{" "}
+            before you reach out.
+          </h2>
+          <p>
+            If you are carrying <strong>grief, transition, or burnout</strong>{" "}
+            and want a steady place to begin, I would be honored to meet you
+            there. You do not have to have the perfect words before we start.
+          </p>
+          <div className="booking-actions" aria-label="Booking options">
+            <a
+              className="button button-white"
+              href={bookingLinks.connectionCall}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <ButtonIcon icon={CalendarHeart} weight="duotone" />
+              <span className="button-label">Book a Connection Call</span>
+              <ButtonIcon icon={ArrowRight} className="button-arrow" />
+            </a>
+          </div>
+        </div>
+      </section>
+        
+              </>
+            } />
+            <Route path="/clients" element={
+              <>
+                <div className="site-shell" style={{ paddingTop: 0 }}>
+                  <main id="top">
+                    <div className="client-page-header">
+                  <h1>Current Clients</h1>
+                  <p>Book your next session or manage payments.</p>
+                </div>
+<section className="section sessions-section" id="sessions" data-reveal>
+            <div className="session-options" aria-label="Session options">
+              {sessionOptions.map((option, index) => (
+                <article
+                  className="session-option"
+                  key={option.title}
+                  data-reveal
+                  style={{ "--reveal-delay": `${index * 90}ms` }}
                 >
-                  <ButtonIcon icon={CalendarHeart} weight="duotone" />
-                  <span className="button-label">Book a Connection Call</span>
-                  <ButtonIcon icon={ArrowRight} className="button-arrow" />
-                </a>
-                <a
-                  className="button button-secondary button-wide"
-                  href={bookingLinks.coachingSession}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <ButtonIcon icon={EnvelopeSimple} weight="duotone" />
-                  <span className="button-label">1-hour coaching session</span>
-                  <ButtonIcon icon={ArrowRight} className="button-arrow" />
-                </a>
-              </div>
+                  <div className="session-option-top">
+                    <TextIcon name={option.icon} className="session-option-icon" />
+                    <div>
+                      <p className="session-label">{option.label}</p>
+                      <h3>{option.title}</h3>
+                    </div>
+                    <span className="session-duration">{option.duration}</span>
+                  </div>
+                  <p>{option.copy}</p>
+                  <a
+                    className="button button-secondary"
+                    href={option.href}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <ButtonIcon icon={CalendarHeart} weight="duotone" />
+                    <span className="button-label">{option.action}</span>
+                    <ButtonIcon icon={ArrowRight} className="button-arrow" />
+                  </a>
+                </article>
+              ))}
             </div>
           </section>
-        </main>
-      </div>
+
+          <section className="section payment-section" id="payment" data-reveal>
+            <div className="payment-heading">
+              <p className="eyebrow">Payment options</p>
+              <h2>
+                Choose the session or package that matches what you and Karissa
+                <span className="title-accent"> have decided together</span>.
+              </h2>
+            </div>
+            <div className="payment-grid" aria-label="Payment options">
+              {paymentOptions.map((option, index) => (
+                <article
+                  className="payment-card"
+                  key={option.title}
+                  data-reveal
+                  style={{ "--reveal-delay": `${index * 70}ms` }}
+                >
+                  <div className="payment-card-top">
+                    <TextIcon name={option.icon} className="payment-icon" />
+                    <div>
+                      <p className="payment-label">{option.label}</p>
+                      <h3>{option.title}</h3>
+                    </div>
+                  </div>
+                  <p className="payment-price">{option.price}</p>
+                  <p>{option.detail}</p>
+                  <PaymentButton href={option.href}>{option.action}</PaymentButton>
+                </article>
+              ))}
+            </div>
+          </section>
+                  </main>
+                </div>
+              </>
+            } />
+          </Routes>
     </div>
   );
 }

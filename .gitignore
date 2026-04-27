@@ -2,6 +2,7 @@ node_modules/
 .DS_Store
 .env
 .env.*
+!.env.example
 
 npm-debug.log*
 yarn-debug.log*
@@ -9,6 +10,7 @@ yarn-error.log*
 pnpm-debug.log*
 
 .playwright-cli/
+.playwright-mcp/
 output/
 current-page*.png
 dist/
