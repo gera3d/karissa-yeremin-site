@@ -777,14 +777,14 @@ export default function App() {
         <div className="closing-inner">
           <p className="eyebrow">Start here</p>
           <h2>
-            You do not have to know{" "}
-            <span className="title-accent">exactly what to say</span>{" "}
+            You don’t need to have the{" "}
+            <span className="title-accent">right words</span>{" "}
             before you reach out.
           </h2>
           <p>
-            If you are carrying <strong>grief, transition, or burnout</strong>{" "}
-            and want a steady place to begin, I would be honored to meet you
-            there. You do not have to have the perfect words before we start.
+            If you’re carrying grief, moving through transition, or feeling the
+            weight of burnout, there is a steady place for you to begin. I would
+            be honored to meet you there—exactly as you are.
           </p>
           <div className="booking-actions" aria-label="Booking options">
             <a
