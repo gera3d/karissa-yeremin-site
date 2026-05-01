@@ -2151,52 +2151,20 @@ figcaption em {
 
 }
 
-@media (max-width: 720px) {
-  :root {
-    --section-gutter: 18px;
-  }
-
+@media (max-width: 880px) {
   body.nav-open {
     overflow: hidden;
   }
 
-  .site-shell {
-    width: min(calc(100% - 24px), 1210px);
-    padding-top: 12px;
-  }
-
-  .brand {
-    max-width: 100%;
-  }
-
-  .brand-logo {
-    gap: 10px;
-  }
-
-  .brand-mark {
-    width: 56px;
-  }
-
-  .brand-name {
-    font-size: 2rem;
-  }
-
-  .brand-subtitle {
-    font-size: 0.66rem;
-  }
-
   .site-header {
-    top: 8px;
     align-items: center;
-    gap: 12px;
-    padding: 9px 10px 9px 12px;
   }
 
   .site-nav {
     position: fixed;
-    top: 86px;
-    right: 12px;
-    left: 12px;
+    top: 94px;
+    right: 28px;
+    left: 28px;
     z-index: 24;
     display: grid;
     gap: 10px;
@@ -2290,6 +2258,49 @@ figcaption em {
     display: block;
     opacity: 1;
     pointer-events: auto;
+  }
+}
+
+@media (max-width: 720px) {
+  :root {
+    --section-gutter: 18px;
+  }
+
+  .site-shell {
+    width: min(calc(100% - 24px), 1210px);
+    padding-top: 12px;
+  }
+
+  .brand {
+    max-width: 100%;
+  }
+
+  .brand-logo {
+    gap: 10px;
+  }
+
+  .brand-mark {
+    width: 56px;
+  }
+
+  .brand-name {
+    font-size: 2rem;
+  }
+
+  .brand-subtitle {
+    font-size: 0.66rem;
+  }
+
+  .site-header {
+    top: 8px;
+    gap: 12px;
+    padding: 9px 10px 9px 12px;
+  }
+
+  .site-nav {
+    top: 86px;
+    right: 12px;
+    left: 12px;
   }
 
   .section {

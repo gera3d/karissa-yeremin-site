@@ -50,26 +50,19 @@ const bookingLinks = {
   connectionCall: "https://calendar.app.google/S2ogPCSRovj9YMeh7",
 };
 
-const getPaymentLink = (envKey, previewLink) =>
-  import.meta.env[envKey] || (import.meta.env.DEV ? previewLink : "");
-
 const paymentLinks = {
-  individualSession: getPaymentLink(
-    "VITE_STRIPE_INDIVIDUAL_SESSION_LINK",
-    "https://buy.stripe.com/test_00wcN74Zccqg5tG8lgfEk00"
-  ),
-  fourSessionPackage: getPaymentLink(
-    "VITE_STRIPE_FOUR_SESSION_PACKAGE_LINK",
-    "https://buy.stripe.com/test_eVq9AV63g9e45tG30WfEk01"
-  ),
-  sixSessionPackage: getPaymentLink(
-    "VITE_STRIPE_SIX_SESSION_PACKAGE_LINK",
-    "https://buy.stripe.com/test_3cI14p4Zc4XOe0c9pkfEk02"
-  ),
-  customAmount: getPaymentLink(
-    "VITE_STRIPE_CUSTOM_AMOUNT_LINK",
-    "https://buy.stripe.com/test_9B6eVfcrE1LCe0c9pkfEk03"
-  ),
+  individualSession:
+    import.meta.env.VITE_STRIPE_INDIVIDUAL_SESSION_LINK ||
+    "https://buy.stripe.com/28E4gs4rJ8e6gVP9RP3cc00",
+  fourSessionPackage:
+    import.meta.env.VITE_STRIPE_FOUR_SESSION_PACKAGE_LINK ||
+    "https://buy.stripe.com/aFa00cgar9iafRL8NL3cc01",
+  sixSessionPackage:
+    import.meta.env.VITE_STRIPE_SIX_SESSION_PACKAGE_LINK ||
+    "https://buy.stripe.com/bJeeV67DV0LE34Z7JH3cc02",
+  customAmount:
+    import.meta.env.VITE_STRIPE_CUSTOM_AMOUNT_LINK ||
+    "https://buy.stripe.com/5kQ00c4rJgKC9tnbZX3cc03",
 };
 
 const sessionOptions = [
@@ -128,7 +121,8 @@ const paymentOptions = [
     label: "Sliding scale",
     title: "Other amount",
     price: "Custom",
-    detail: "Use this after Karissa has agreed to a sliding-scale or adjusted amount.",
+    detail:
+      "Use this after Karissa has agreed to a sliding-scale or adjusted amount. Enter the agreed dollar amount as the quantity at checkout.",
     href: paymentLinks.customAmount,
     action: "Pay a custom amount",
   },
@@ -214,7 +208,7 @@ const testimonials = [
 ];
 
 const navItems = [
-  { label: "Who This Is For", href: "/#support" },
+  { label: "Who This Space Holds", href: "/#support" },
   { label: "Coaching", href: "/#scope" },
   { label: "About", href: "/#about" },
   { label: "Testimonials", href: "/#testimonials" },
@@ -546,22 +540,24 @@ export default function App() {
                     decoding="async"
                   />
                 </figure>
-                </div>
+              </div>
             </div>
           </section>
 
           <section className="section support-section" id="support">
-            <div className="section-kicker">This Space Is For</div>
+            <div className="section-kicker">Who This Space Holds</div>
             <div className="support-lead">
-              <h2>
-                This is for the person who can hold it all together on the
-                outside, but knows something deeper is asking for attention.{" "}
-                <span className="title-accent">Not to be fixed - but to be witnessed.</span>
-              </h2>
+              <h2>You're holding so much.</h2>
               <p>
-                You may not have the language for what you're moving through.
-                Only the sense that something within you has shifted, and you're
-                ready to meet it differently.
+                Responsibilities, expectations, a grief you haven't had time to
+                sit with. You've looked for help in all the right places &mdash;
+                and still, something isn't shifting.
+              </p>
+              <p>
+                Not because you haven't done enough. But because what's waiting
+                for you isn't in a book or a podcast. It's in turning toward
+                yourself &mdash; with honesty, with tenderness, with curiosity
+                &mdash; and finding your way back to who you are.
               </p>
             </div>
             <div className="support-grid">
@@ -631,7 +627,7 @@ export default function App() {
                 <span className="title-accent">—I came through lived experience.</span>
               </h2>
               <p>
-                For over five years, I taught in the public school system, holding space for growth, struggle, and resilience in real time. Alongside that, I've spent nearly two decades mentoring and walking with people through the complexities of their lives as a community leader. I'm also a graduate of UC Berkeley and a former PAC-10 All-Academic collegiate gymnast—experiences that shaped both my discipline and my ability to stay steady through challenge.
+                I'm Karissa Yeremin, and for over five years, I taught in the public school system, holding space for growth, struggle, and resilience in real time. Alongside that, I've spent nearly two decades mentoring and walking with people through the complexities of their lives as a community leader. I'm also a graduate of UC Berkeley and a former PAC-10 All-Academic collegiate gymnast—experiences that shaped both my discipline and my ability to stay steady through challenge.
               </p>
               <p>
                 I'm trained in the International Coaching Federation (ICF) core competencies and Code of Ethics, which means I hold this work with care, integrity, and deep respect for the people I sit with.
