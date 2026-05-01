@@ -1564,7 +1564,7 @@ figcaption em {
   background:
     linear-gradient(90deg, rgba(255, 253, 247, 0.94) 0 50%, rgba(207, 231, 200, 0.72) 50% 100%),
     rgba(243, 247, 239, 0.86);
-  align-items: center;
+  align-items: start;
   padding-top: clamp(36px, 4.2vw, 54px);
   padding-bottom: clamp(36px, 4.2vw, 54px);
 }
@@ -1640,10 +1640,8 @@ figcaption em {
   position: relative;
   z-index: 1;
   display: grid;
-  justify-self: center;
-  align-self: center;
-  width: min(100%, 390px);
-  margin-left: 0;
+  align-self: stretch;
+  width: 100%;
 }
 
 .about-photo::before {
@@ -1661,7 +1659,8 @@ figcaption em {
   position: relative;
   overflow: hidden;
   width: 100%;
-  aspect-ratio: 4 / 5;
+  height: 100%;
+  min-height: 420px;
   border: 12px solid rgba(255, 253, 247, 0.92);
   background: var(--paper-strong);
   box-shadow: 0 30px 80px rgba(13, 50, 69, 0.14);
@@ -2108,26 +2107,13 @@ figcaption em {
   }
 
   .hero-side {
-    justify-items: start;
-    max-width: 40rem;
-    width: 100%;
-    padding-top: 0;
+    display: none;
   }
 
   .hero-portrait {
     display: none;
   }
 
-  .hero-note {
-    position: static;
-    display: block;
-    max-width: 26rem;
-    width: min(100%, 26rem);
-    margin-top: 0;
-    margin-right: 0;
-  }
-
-  .about-photo,
   .closing-section .booking-actions {
     justify-self: start;
   }
@@ -2152,7 +2138,15 @@ figcaption em {
   }
 
   .about-photo {
+    align-self: start;
+    justify-self: start;
     width: min(100%, 520px);
+  }
+
+  .about-photo-slider {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 4 / 5;
   }
 
 }

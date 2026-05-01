@@ -91,7 +91,7 @@ const sessionOptions = [
     href: bookingLinks.coachingSession,
     action: "Book a full session",
     copy:
-      "This 60-minute coaching session is designed to support you through grief, transition, or overwhelm. This is a space to pause, reflect, and reconnect with yourself, and then move forward in a way that feels grounded and aligned with who you are.",
+      "This 60-minute coaching session is a space to pause, reflect, and reconnect with yourself, and then move forward in a way that feels grounded and aligned with who you are.",
   },
 ];
 
@@ -331,37 +331,10 @@ function BrandLogo({ assetBase }) {
 export default function App() {
   const assetBase = import.meta.env.BASE_URL;
   const pageRef = useRef(null);
-  const aboutPhotos = [
-    {
-      src: `${assetBase}karissa-ponytail.jpg`,
-      alt: "Karissa Yeremin smiling with a colorful ponytail",
-      focalPoint: "center center",
-      width: 844,
-      height: 1125,
-    },
-    {
-      src: `${assetBase}karissa-portrait.jpeg`,
-      alt: "Karissa Yeremin smiling outdoors",
-      focalPoint: "center 34%",
-      width: 400,
-      height: 400,
-    },
-  ];
-  const [aboutPhotoIndex, setAboutPhotoIndex] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const showPreviousPhoto = () => {
-    setAboutPhotoIndex((currentIndex) =>
-      currentIndex === 0 ? aboutPhotos.length - 1 : currentIndex - 1
-    );
-  };
 
   const closeMenu = () => {
     setIsMenuOpen(false);
-  };
-  const showNextPhoto = () => {
-    setAboutPhotoIndex((currentIndex) =>
-      currentIndex === aboutPhotos.length - 1 ? 0 : currentIndex + 1
-    );
   };
 
   useEffect(() => {
@@ -536,7 +509,7 @@ export default function App() {
 
             <div className="hero-inner">
               <div className="hero-copy">
-                <p className="eyebrow">Grief, transition, and burnout coaching</p>
+                <p className="eyebrow">Grief, Life Transitions, and Burnout Coaching</p>
                 <h1>
                   You can come{" "}
                   <span className="title-accent">exactly as you are.</span>
@@ -573,13 +546,7 @@ export default function App() {
                     decoding="async"
                   />
                 </figure>
-                <aside className="hero-note">
-                  <p>
-                    Grief is <strong>not something to fix</strong>. It is
-                    something to honor, make room for, and learn how to live with.
-                  </p>
-                </aside>
-              </div>
+                </div>
             </div>
           </section>
 
@@ -658,79 +625,46 @@ export default function App() {
 
           <section className="section about-section" id="about">
             <div className="about-copy" data-reveal>
-              <p className="eyebrow">Why Karissa</p>
+              <p className="eyebrow">About Me</p>
               <h2>
-                I know what it means to walk with grief and
-                <span className="title-accent"> still keep living</span>.
+                I didn't come to this work through theory alone
+                <span className="title-accent">—I came through lived experience.</span>
               </h2>
               <p>
-                My own experiences with grief are part of why I care so deeply
-                about this work. I am empathetic, steady, and a good listener.
-                Years of mentoring in school and church settings have shaped the
-                way I sit with people, ask questions, and help them feel less
-                alone in hard seasons.
+                For over five years, I taught in the public school system, holding space for growth, struggle, and resilience in real time. Alongside that, I've spent nearly two decades mentoring and walking with people through the complexities of their lives as a community leader. I'm also a graduate of UC Berkeley and a former PAC-10 All-Academic collegiate gymnast—experiences that shaped both my discipline and my ability to stay steady through challenge.
               </p>
-              <div className="about-anchors" aria-label="Karissa's coaching presence">
-                <div className="about-anchor">
-                  <TextIcon name="honor" className="about-anchor-icon" />
-                  <span>Grief-informed presence that does not rush your story.</span>
-                </div>
-                <div className="about-anchor">
-                  <TextIcon name="notice" className="about-anchor-icon" />
-                  <span>Years of mentoring shaped by listening and clear questions.</span>
-                </div>
-              </div>
+              <p>
+                I'm trained in the International Coaching Federation (ICF) core competencies and Code of Ethics, which means I hold this work with care, integrity, and deep respect for the people I sit with.
+              </p>
+              <p>
+                But the most meaningful parts of what I offer were shaped outside of titles.
+              </p>
+              <p>
+                I've navigated my own seasons of grief and transition—becoming a divorced mom of two boys, navigating a Type 1 diabetes diagnosis with my son, and walking through a profound shift in my belief system. These experiences didn't give me all the answers, but they taught me how to stay present in the questions. They taught me how to sit in the dark without rushing it, and how to find a way forward that feels honest and sustainable.
+              </p>
+              <p>That's the space I offer now.</p>
+              <p>
+                A steady, grounded place where you don't have to have it all figured out. Where you can bring what's real—grief, change, uncertainty—and we can gently begin to make sense of it together. Not by forcing a path, but by listening for what's already within you and helping you take one meaningful step at a time.
+              </p>
+              <p>Because a full and meaningful life isn't something you arrive at all at once.</p>
             </div>
             <figure className="about-photo" data-reveal style={{ "--reveal-delay": "110ms" }}>
-              <div className="about-photo-slider" aria-live="polite">
-                <div
-                  className="about-photo-track"
-                  style={{ transform: `translateX(-${aboutPhotoIndex * 100}%)` }}
-                >
-                  {aboutPhotos.map((photo) => (
-                    <img
-                      key={photo.src}
-                      src={photo.src}
-                      alt={photo.alt}
-                      width={photo.width}
-                      height={photo.height}
-                      loading="lazy"
-                      decoding="async"
-                      style={{ objectPosition: photo.focalPoint }}
-                    />
-                  ))}
-                </div>
+              <div className="about-photo-slider">
+                <img
+                  src={`${assetBase}karissa-ponytail.jpg`}
+                  alt="Karissa Yeremin smiling with a colorful ponytail"
+                  width={844}
+                  height={1125}
+                  loading="lazy"
+                  decoding="async"
+                  style={{ objectPosition: "center center" }}
+                />
               </div>
               <div className="about-photo-footer">
                 <figcaption>
                   Coaching with Karissa is gentle, client-led, and grounded in
                   honest presence.
                 </figcaption>
-                <div className="photo-controls" aria-label="Karissa photo controls">
-                  <button
-                    className="photo-arrow"
-                    type="button"
-                    aria-label="Show previous Karissa photo"
-                    onClick={showPreviousPhoto}
-                  >
-                    <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
-                      <path d="M12.8 4.6 7.4 10l5.4 5.4" />
-                    </svg>
-                  </button>
-                  <span className="photo-count">
-                    {aboutPhotoIndex + 1}/{aboutPhotos.length}
-                  </span>
-                  <button
-                    className="photo-arrow"
-                    type="button"
-                    aria-label="Show next Karissa photo"
-                    onClick={showNextPhoto}
-                  >
-                    <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
-                      <path d="m7.2 4.6 5.4 5.4-5.4 5.4" />
-                    </svg>
-                  </button>
-                </div>
               </div>
             </figure>
           </section>
@@ -782,7 +716,7 @@ export default function App() {
             before you reach out.
           </h2>
           <p>
-            If you’re carrying grief, moving through transition, or feeling the
+            If you’re carrying grief, moving through a life transition, or feeling the
             weight of burnout, there is a steady place for you to begin. I would
             be honored to meet you there—exactly as you are.
           </p>
