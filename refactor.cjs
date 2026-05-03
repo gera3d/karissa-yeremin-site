@@ -33,7 +33,7 @@ ${landingContent}
             <Route path="/clients" element={
               <>
                 <div className="client-page-header" style={{ paddingTop: '120px', paddingBottom: '40px', textAlign: 'center' }}>
-                  <h1 style={{ fontSize: 'clamp(2.5rem, 4vw, 3.5rem)', color: 'var(--ink)', marginBottom: '16px' }}>Current Clients</h1>
+                  <h1 style={{ fontSize: 'clamp(2.5rem, 4vw, 3.5rem)', color: 'var(--ink)', marginBottom: '16px' }}>Book a Session</h1>
                   <p style={{ fontSize: '1.2rem', color: 'var(--sage-ink)' }}>Book your next session or manage payments.</p>
                 </div>
 ${clientContent}

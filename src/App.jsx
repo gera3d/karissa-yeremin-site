@@ -212,7 +212,7 @@ const navItems = [
   { label: "Coaching", href: "/#scope" },
   { label: "About", href: "/#about" },
   { label: "Testimonials", href: "/#testimonials" },
-  { label: "Current Clients", href: "/clients" },
+  { label: "Book a Session", href: "/clients" },
 ];
 
 const iconShapes = {
@@ -738,72 +738,73 @@ export default function App() {
                 <div className="site-shell" style={{ paddingTop: 0 }}>
                   <main id="top">
                     <div className="client-page-header">
-                  <h1>Current Clients</h1>
-                  <p>Book your next session or manage payments.</p>
-                </div>
-<section className="section sessions-section" id="sessions" data-reveal>
-            <div className="session-options" aria-label="Session options">
-              {sessionOptions.map((option, index) => (
-                <article
-                  className="session-option"
-                  key={option.title}
-                  data-reveal
-                  style={{ "--reveal-delay": `${index * 90}ms` }}
-                >
-                  <div className="session-option-top">
-                    <TextIcon name={option.icon} className="session-option-icon" />
-                    <div>
-                      <p className="session-label">{option.label}</p>
-                      <h3>{option.title}</h3>
+                      <h1>Book a Session</h1>
+                      <p>Book your next session or manage payments.</p>
                     </div>
-                    <span className="session-duration">{option.duration}</span>
-                  </div>
-                  <p>{option.copy}</p>
-                  <a
-                    className="button button-secondary"
-                    href={option.href}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <ButtonIcon icon={CalendarHeart} weight="duotone" />
-                    <span className="button-label">{option.action}</span>
-                    <ButtonIcon icon={ArrowRight} className="button-arrow" />
-                  </a>
-                </article>
-              ))}
-            </div>
-          </section>
 
-          <section className="section payment-section" id="payment" data-reveal>
-            <div className="payment-heading">
-              <p className="eyebrow">Payment options</p>
-              <h2>
-                Choose the session or package that matches what you and Karissa
-                <span className="title-accent"> have decided together</span>.
-              </h2>
-            </div>
-            <div className="payment-grid" aria-label="Payment options">
-              {paymentOptions.map((option, index) => (
-                <article
-                  className="payment-card"
-                  key={option.title}
-                  data-reveal
-                  style={{ "--reveal-delay": `${index * 70}ms` }}
-                >
-                  <div className="payment-card-top">
-                    <TextIcon name={option.icon} className="payment-icon" />
-                    <div>
-                      <p className="payment-label">{option.label}</p>
-                      <h3>{option.title}</h3>
-                    </div>
-                  </div>
-                  <p className="payment-price">{option.price}</p>
-                  <p>{option.detail}</p>
-                  <PaymentButton href={option.href}>{option.action}</PaymentButton>
-                </article>
-              ))}
-            </div>
-          </section>
+                    <section className="section sessions-section" id="sessions" data-reveal>
+                      <div className="session-options" aria-label="Session options">
+                        {sessionOptions.map((option, index) => (
+                          <article
+                            className="session-option"
+                            key={option.title}
+                            data-reveal
+                            style={{ "--reveal-delay": `${index * 90}ms` }}
+                          >
+                            <div className="session-option-top">
+                              <TextIcon name={option.icon} className="session-option-icon" />
+                              <div>
+                                <p className="session-label">{option.label}</p>
+                                <h3>{option.title}</h3>
+                              </div>
+                              <span className="session-duration">{option.duration}</span>
+                            </div>
+                            <p>{option.copy}</p>
+                            <a
+                              className="button button-secondary"
+                              href={option.href}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              <ButtonIcon icon={CalendarHeart} weight="duotone" />
+                              <span className="button-label">{option.action}</span>
+                              <ButtonIcon icon={ArrowRight} className="button-arrow" />
+                            </a>
+                          </article>
+                        ))}
+                      </div>
+                    </section>
+
+                    <section className="section payment-section" id="payment" data-reveal>
+                      <div className="payment-heading">
+                        <p className="eyebrow">Payment options</p>
+                        <h2>
+                          Choose the session or package that matches what you and Karissa
+                          <span className="title-accent"> have decided together</span>.
+                        </h2>
+                      </div>
+                      <div className="payment-grid" aria-label="Payment options">
+                        {paymentOptions.map((option, index) => (
+                          <article
+                            className="payment-card"
+                            key={option.title}
+                            data-reveal
+                            style={{ "--reveal-delay": `${index * 70}ms` }}
+                          >
+                            <div className="payment-card-top">
+                              <TextIcon name={option.icon} className="payment-icon" />
+                              <div>
+                                <p className="payment-label">{option.label}</p>
+                                <h3>{option.title}</h3>
+                              </div>
+                            </div>
+                            <p className="payment-price">{option.price}</p>
+                            <p>{option.detail}</p>
+                            <PaymentButton href={option.href}>{option.action}</PaymentButton>
+                          </article>
+                        ))}
+                      </div>
+                    </section>
                   </main>
                 </div>
               </>
