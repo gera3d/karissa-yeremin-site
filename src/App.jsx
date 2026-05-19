@@ -627,7 +627,7 @@ export default function App() {
                 <span className="title-accent">—I came through lived experience.</span>
               </h2>
               <p>
-                I'm Karissa Yeremin, and for over five years, I taught in the public school system, holding space for growth, struggle, and resilience in real time. Alongside that, I've spent nearly two decades mentoring and walking with people through the complexities of their lives as a community leader. I'm also a graduate of UC Berkeley and a former PAC-10 All-Academic collegiate gymnast—experiences that shaped both my discipline and my ability to stay steady through challenge.
+                I'm Karissa Yeremin, and for over six years, I taught in the public school system, holding space for growth, struggle, and resilience. Alongside that, I've spent nearly two decades mentoring and walking with people through the complexities of their lives as a community leader. I'm also a graduate of UC Berkeley and a former PAC-10 All-Academic collegiate gymnast—experiences that shaped both my discipline and my ability to stay steady through challenge.
               </p>
               <p>
                 I'm trained in the International Coaching Federation (ICF) core competencies and Code of Ethics, which means I hold this work with care, integrity, and deep respect for the people I sit with.
