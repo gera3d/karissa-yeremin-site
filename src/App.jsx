@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import {
   ArrowRight,
   BatteryWarning,
@@ -212,7 +212,7 @@ const navItems = [
   { label: "Coaching", href: "/#scope" },
   { label: "About", href: "/#about" },
   { label: "Testimonials", href: "/#testimonials" },
-  { label: "Book a Session", href: "/clients" },
+  { label: "Book a Session", href: "/booking" },
 ];
 
 const iconShapes = {
@@ -471,14 +471,14 @@ export default function App() {
               <ButtonIcon icon={ArrowRight} className="button-arrow" />
             </a>
           </nav>
-          <button
-            className="menu-scrim"
-            type="button"
-            aria-label="Close navigation menu"
-            tabIndex={isMenuOpen ? 0 : -1}
-            onClick={closeMenu}
-          />
         </header>
+        <button
+          className={`menu-scrim${isMenuOpen ? " is-visible" : ""}`}
+          type="button"
+          aria-label="Close navigation menu"
+          tabIndex={isMenuOpen ? 0 : -1}
+          onClick={closeMenu}
+        />
       </div>
 
       <Routes>
@@ -733,7 +733,7 @@ export default function App() {
         
               </>
             } />
-            <Route path="/clients" element={
+            <Route path="/booking" element={
               <>
                 <div className="site-shell" style={{ paddingTop: 0 }}>
                   <main id="top">
@@ -809,6 +809,7 @@ export default function App() {
                 </div>
               </>
             } />
+            <Route path="/clients" element={<Navigate to="/booking" replace />} />
           </Routes>
     </div>
   );

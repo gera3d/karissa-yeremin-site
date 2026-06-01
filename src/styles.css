@@ -32,13 +32,13 @@ svg {
 
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow-x: clip;
   background:
     linear-gradient(180deg, #fffdf7 0%, #f3f8f1 42%, #edf5ec 100%);
   color: var(--ink);
@@ -2180,17 +2180,21 @@ figcaption em {
       0 28px 70px rgba(13, 50, 69, 0.24);
     opacity: 0;
     pointer-events: none;
+    visibility: hidden;
     transform: translate3d(0, -8px, 0) scale(0.985);
     transform-origin: top center;
     transition:
       opacity 180ms ease,
-      transform 220ms var(--ease-out-soft);
+      transform 220ms var(--ease-out-soft),
+      visibility 0s linear 220ms;
   }
 
   .is-menu-open .site-nav {
     opacity: 1;
     pointer-events: auto;
+    visibility: visible;
     transform: translate3d(0, 0, 0) scale(1);
+    transition-delay: 0s;
   }
 
   .site-nav-links {
@@ -2247,19 +2251,24 @@ figcaption em {
   .menu-scrim {
     position: fixed;
     inset: 0;
-    z-index: 23;
+    z-index: 19;
     border: 0;
     background: rgba(13, 50, 69, 0.18);
     cursor: pointer;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 180ms ease;
+    visibility: hidden;
+    transition:
+      opacity 180ms ease,
+      visibility 0s linear 180ms;
   }
 
-  .is-menu-open .menu-scrim {
+  .menu-scrim.is-visible {
     display: block;
     opacity: 1;
     pointer-events: auto;
+    visibility: visible;
+    transition-delay: 0s;
   }
 }
 
