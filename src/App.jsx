@@ -4,20 +4,18 @@ import {
   ArrowRight,
   BatteryWarning,
   CalendarHeart,
-  CompassRose,
+  DownloadSimple,
   DoorOpen,
-  EnvelopeSimple,
   Eye,
+  FilePdf,
   FlowerLotus,
   Footprints,
   HandHeart,
   HeartBreak,
   List,
-  Pause,
   Play,
   Pulse,
   Signpost,
-  SpeakerHigh,
   Waveform,
   X,
 } from "@phosphor-icons/react";
@@ -46,23 +44,22 @@ const supportItems = [
 ];
 
 const bookingLinks = {
-  coachingSession: "https://calendar.app.google/V8sKiLacsoy6jXfo7",
-  connectionCall: "https://calendar.app.google/S2ogPCSRovj9YMeh7",
+  coachingSession:
+    "https://calendar.google.com/appointments/schedules/AcZssZ2NjsBa_Xbe8TJ4o-TgdMMwBD42MLL6iLg52GhdyJLTapMPzDdsvQSPOPa0_ivsR-KdQDDiybng",
+  connectionCall: "https://calendar.app.google/vfEKVHeU9U3e1Bca9",
 };
 
 const paymentLinks = {
-  individualSession:
-    import.meta.env.VITE_STRIPE_INDIVIDUAL_SESSION_LINK ||
-    "https://buy.stripe.com/28E4gs4rJ8e6gVP9RP3cc00",
-  fourSessionPackage:
-    import.meta.env.VITE_STRIPE_FOUR_SESSION_PACKAGE_LINK ||
-    "https://buy.stripe.com/aFa00cgar9iafRL8NL3cc01",
-  sixSessionPackage:
-    import.meta.env.VITE_STRIPE_SIX_SESSION_PACKAGE_LINK ||
-    "https://buy.stripe.com/bJeeV67DV0LE34Z7JH3cc02",
+  individualSession: import.meta.env.VITE_STRIPE_INDIVIDUAL_SESSION_LINK || "",
+  sixSessionPackage: import.meta.env.VITE_STRIPE_SIX_SESSION_PACKAGE_LINK || "",
+  twelveSessionPackage: import.meta.env.VITE_STRIPE_TWELVE_SESSION_PACKAGE_LINK || "",
   customAmount:
     import.meta.env.VITE_STRIPE_CUSTOM_AMOUNT_LINK ||
     "https://buy.stripe.com/5kQ00c4rJgKC9tnbZX3cc03",
+};
+
+const resourceLinks = {
+  hiddenFormsOfGrief: "5-hidden-forms-of-grief.pdf",
 };
 
 const sessionOptions = [
@@ -93,28 +90,28 @@ const paymentOptions = [
     icon: "presence",
     label: "Single session",
     title: "Individual coaching session",
-    price: "$100",
+    price: "$120",
     detail: "One 60-minute virtual coaching session with Karissa.",
     href: paymentLinks.individualSession,
     action: "Pay for one session",
   },
   {
-    icon: "steps",
-    label: "Package",
-    title: "Four-session package",
-    price: "$375",
-    detail: "Four 60-minute virtual sessions for ongoing support.",
-    href: paymentLinks.fourSessionPackage,
-    action: "Pay for four sessions",
-  },
-  {
     icon: "honor",
     label: "Package",
     title: "Six-session package",
-    price: "$550",
-    detail: "Six 60-minute virtual sessions for deeper continuity.",
+    price: "$650",
+    detail: "Six 60-minute virtual sessions for steady continuity.",
     href: paymentLinks.sixSessionPackage,
     action: "Pay for six sessions",
+  },
+  {
+    icon: "steps",
+    label: "Package",
+    title: "Twelve-session package",
+    price: "$1,100",
+    detail: "Twelve 60-minute virtual sessions for deeper long-term support.",
+    href: paymentLinks.twelveSessionPackage,
+    action: "Pay for twelve sessions",
   },
   {
     icon: "restore",
@@ -211,6 +208,7 @@ const navItems = [
   { label: "Who This Space Holds", href: "/#support" },
   { label: "Coaching", href: "/#scope" },
   { label: "About", href: "/#about" },
+  { label: "Free Resource", href: "/#resources" },
   { label: "Testimonials", href: "/#testimonials" },
   { label: "Book a Session", href: "/booking" },
 ];
@@ -324,6 +322,7 @@ function BrandLogo({ assetBase }) {
 
 export default function App() {
   const assetBase = import.meta.env.BASE_URL;
+  const location = useLocation();
   const pageRef = useRef(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -429,6 +428,22 @@ export default function App() {
       document.body.classList.remove("nav-open");
     };
   }, [isMenuOpen]);
+
+  useEffect(() => {
+    const frameId = window.requestAnimationFrame(() => {
+      if (location.hash) {
+        const targetId = decodeURIComponent(location.hash.slice(1));
+        document.getElementById(targetId)?.scrollIntoView({ block: "start" });
+        return;
+      }
+
+      window.scrollTo({ top: 0, left: 0 });
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+    };
+  }, [location.hash, location.pathname]);
 
   return (
     <div className="page" ref={pageRef}>
@@ -615,6 +630,35 @@ export default function App() {
                 </p>
               </article>
             </div>
+          </section>
+
+          <section className="section resource-section" id="resources" data-reveal>
+            <div className="resource-copy">
+              <p className="eyebrow">Free resource</p>
+              <h2>
+                5 Hidden Forms of{" "}
+                <span className="title-accent">Grief</span>
+              </h2>
+              <p>
+                A gentle guide for noticing the kinds of grief that can live under
+                the surface of everyday life.
+              </p>
+            </div>
+            <a
+              className="resource-download"
+              href={`${assetBase}${resourceLinks.hiddenFormsOfGrief}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span className="resource-download-icon" aria-hidden="true">
+                <FilePdf weight="duotone" focusable="false" />
+              </span>
+              <span>
+                <span className="resource-download-label">Download PDF</span>
+                <strong>5 Hidden Forms of Grief</strong>
+              </span>
+              <ButtonIcon icon={DownloadSimple} className="button-arrow" />
+            </a>
           </section>
 
           
