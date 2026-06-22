@@ -51,11 +51,9 @@ const bookingLinks = {
 
 const paymentLinks = {
   individualSession: import.meta.env.VITE_STRIPE_INDIVIDUAL_SESSION_LINK || "",
-  sixSessionPackage: import.meta.env.VITE_STRIPE_SIX_SESSION_PACKAGE_LINK || "",
-  twelveSessionPackage: import.meta.env.VITE_STRIPE_TWELVE_SESSION_PACKAGE_LINK || "",
-  customAmount:
-    import.meta.env.VITE_STRIPE_CUSTOM_AMOUNT_LINK ||
-    "https://buy.stripe.com/5kQ00c4rJgKC9tnbZX3cc03",
+  sixSessionPackage: "https://buy.stripe.com/6oU7sE7DVfGy493bZX3cc04",
+  twelveSessionPackage: "https://buy.stripe.com/28E14g4rJgKC20VbZX3cc05",
+  customAmount: "https://buy.stripe.com/5kQ00c4rJgKC9tnbZX3cc03",
 };
 
 const resourceLinks = {
@@ -115,13 +113,60 @@ const paymentOptions = [
   },
   {
     icon: "restore",
-    label: "Sliding scale",
-    title: "Other amount",
+    label: "Custom",
+    title: "Custom package",
     price: "Custom",
     detail:
-      "Use this after Karissa has agreed to a sliding-scale or adjusted amount. Enter the agreed dollar amount as the quantity at checkout.",
+      "Use this after Karissa has agreed to a custom package or adjusted amount.",
     href: paymentLinks.customAmount,
-    action: "Pay a custom amount",
+    action: "Pay for custom package",
+  },
+].filter((option) => option.href);
+
+const navigatingGriefLinks = {
+  application: "https://forms.gle/VguGezB2AardaaZd8",
+  discoveryCall: "https://calendar.app.google/Y4qhhxcPmCiwfF1o6",
+  email: "karissa@thesacredgrovecoach.com",
+};
+
+const griefExpectations = [
+  "Six 90-minute virtual sessions, held weekly via Google Meet",
+  "A small, intimate group - no more than 8 participants",
+  "A guided participant workbook with weekly reflections, exercises, and journal space",
+  "A space rooted in compassion, confidentiality, and zero pressure to be “further along” than you are",
+  "Between-session support via email for brief questions or reflections",
+];
+
+const griefWeeks = [
+  {
+    week: "Week 1",
+    title: "Understanding Grief",
+    focus: "Why Yours Counts",
+  },
+  {
+    week: "Week 2",
+    title: "The Many Faces of Grief",
+    focus: "Body, Mind, and Behavior",
+  },
+  {
+    week: "Week 3",
+    title: "Ambiguous Loss",
+    focus: "Grief Without Closure",
+  },
+  {
+    week: "Week 4",
+    title: "Chronic Sorrow",
+    focus: "Living With Ongoing Loss",
+  },
+  {
+    week: "Week 5",
+    title: "Identity Grief",
+    focus: "Who You Are Now",
+  },
+  {
+    week: "Week 6",
+    title: "Finding Meaning",
+    focus: "Honoring Grief & Moving Forward",
   },
 ];
 
@@ -202,11 +247,31 @@ const testimonials = [
     date: "April 15, 2026",
     dateTime: "2026-04-15",
   },
+  {
+    takeaway: "Dreams made actionable",
+    quote: (
+      <>
+        Karissa reignited a fire for my goals in a whole new way. Her energy is{" "}
+        <strong className="testimonial-emphasis">magnetic</strong>, instantly making you feel
+        supported throughout your journey. She helped me get excited about what's possible for
+        myself. She has a gift for breaking big dreams down into{" "}
+        <strong className="testimonial-emphasis">real, actionable steps</strong> that feel
+        manageable and fun! Her warm, bright presence makes the whole process feel both inspiring and
+        approachable. I left each session feeling{" "}
+        <strong className="testimonial-emphasis">motivated and clear</strong> on what my next steps
+        were. Thank you Karissa!
+      </>
+    ),
+    name: "Mary",
+    date: "June 5, 2026",
+    dateTime: "2026-06-05",
+  },
 ];
 
 const navItems = [
   { label: "Who This Space Holds", href: "/#support" },
   { label: "Coaching", href: "/#scope" },
+  { label: "Navigating Grief", href: "/navigating-grief" },
   { label: "About", href: "/#about" },
   { label: "Free Resource", href: "/#resources" },
   { label: "Testimonials", href: "/#testimonials" },
@@ -848,6 +913,139 @@ export default function App() {
                           </article>
                         ))}
                       </div>
+                    </section>
+                  </main>
+                </div>
+              </>
+            } />
+            <Route path="/navigating-grief" element={
+              <>
+                <div className="site-shell" style={{ paddingTop: 0 }}>
+                  <main id="top">
+                    <section className="grief-hero" data-reveal>
+                      <div className="grief-hero-copy">
+                        <p className="eyebrow">Virtual small group coaching</p>
+                        <h1>
+                          Navigating{" "}
+                          <span className="title-accent">Grief</span>
+                        </h1>
+                        <p>
+                          Navigating Grief is a six-week virtual small group coaching experience for anyone carrying a loss the world doesn’t always recognize &mdash; divorce, estrangement, chronic illness, a faith that no longer fits, a friendship that faded, a version of yourself you’ve had to let go of.
+                        </p>
+                        <p className="grief-hero-statement">
+                          If you’ve ever wondered whether your grief “counts” &ndash; it does. And this is a space built specifically for it.
+                        </p>
+                        <div className="grief-hero-actions">
+                          <a
+                            className="button button-primary"
+                            href={navigatingGriefLinks.application}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            <ButtonIcon icon={HandHeart} weight="duotone" />
+                            <span className="button-label">Apply to reserve your spot</span>
+                            <ButtonIcon icon={ArrowRight} className="button-arrow" />
+                          </a>
+                        </div>
+                      </div>
+                      <aside className="grief-hero-card" aria-label="Navigating Grief details">
+                        <TextIcon name="presence" className="grief-hero-icon" />
+                        <p className="grief-card-label">Founding Member Rate</p>
+                        <p className="grief-card-price">$497</p>
+                        <p>
+                          This rate is offered for this first cohort only. Space is limited to 8 participants.
+                        </p>
+                      </aside>
+                    </section>
+
+                    <section className="section grief-expect-section" data-reveal>
+                      <div className="grief-section-heading">
+                        <p className="eyebrow">What to expect</p>
+                        <h2>A steady, intimate container for grief that doesn’t need to be explained away.</h2>
+                      </div>
+                      <div className="grief-expect-list">
+                        {griefExpectations.map((item, index) => (
+                          <article
+                            className="grief-expect-item"
+                            key={item}
+                            data-reveal
+                            style={{ "--reveal-delay": `${index * 70}ms` }}
+                          >
+                            <span className="grief-list-number">0{index + 1}</span>
+                            <p>{item}</p>
+                          </article>
+                        ))}
+                      </div>
+                    </section>
+
+                    <section className="section grief-weeks-section" data-reveal>
+                      <div className="grief-section-heading">
+                        <p className="eyebrow">What we explore together</p>
+                        <h2>Six weeks of naming, tending, and finding your way forward.</h2>
+                      </div>
+                      <div className="grief-week-grid">
+                        {griefWeeks.map((week, index) => (
+                          <article
+                            className="grief-week-card"
+                            key={week.week}
+                            data-reveal
+                            style={{ "--reveal-delay": `${index * 70}ms` }}
+                          >
+                            <p className="grief-week-label">{week.week}</p>
+                            <h3>{week.title}</h3>
+                            <p>{week.focus}</p>
+                          </article>
+                        ))}
+                      </div>
+                    </section>
+
+                    <section className="section grief-investment-section" data-reveal>
+                      <div className="grief-investment-copy">
+                        <p className="eyebrow">Investment</p>
+                        <h2>
+                          Founding Member Rate:{" "}
+                          <span className="title-accent">$497</span>
+                        </h2>
+                        <p>
+                          This rate is offered for this first cohort only. Space is limited to 8 participants &mdash; apply to reserve your spot.
+                        </p>
+                        <p>
+                          Have questions? Email Karissa at{" "}
+                          <a href={`mailto:${navigatingGriefLinks.email}`}>
+                            {navigatingGriefLinks.email}
+                          </a>{" "}
+                          or set up a short discovery call.
+                        </p>
+                      </div>
+                      <div className="grief-investment-actions" aria-label="Navigating Grief actions">
+                        <a
+                          className="button button-primary"
+                          href={navigatingGriefLinks.application}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          <ButtonIcon icon={HandHeart} weight="duotone" />
+                          <span className="button-label">Apply to reserve your spot</span>
+                          <ButtonIcon icon={ArrowRight} className="button-arrow" />
+                        </a>
+                        <a
+                          className="button button-secondary"
+                          href={navigatingGriefLinks.discoveryCall}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          <ButtonIcon icon={CalendarHeart} weight="duotone" />
+                          <span className="button-label">Set up a discovery call</span>
+                          <ButtonIcon icon={ArrowRight} className="button-arrow" />
+                        </a>
+                      </div>
+                    </section>
+
+                    <section className="section grief-host-section" data-reveal>
+                      <TextIcon name="honor" className="grief-host-icon" />
+                      <p>
+                        Taught and hosted by Karissa Yeremin, ICF-Certified Professional Coach and Grief Practitioner, founder of Sacred Grove Coaching.
+                      </p>
                     </section>
                   </main>
                 </div>

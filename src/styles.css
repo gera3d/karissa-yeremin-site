@@ -1535,6 +1535,304 @@ figcaption em {
   margin-top: auto;
 }
 
+.grief-hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.78fr) minmax(280px, 0.34fr);
+  gap: clamp(28px, 5vw, 72px);
+  align-items: stretch;
+  overflow: hidden;
+  padding: clamp(70px, 8vw, 118px) var(--section-gutter) clamp(48px, 6vw, 76px);
+  border: 1px solid rgba(7, 90, 132, 0.1);
+  border-top: 0;
+  border-radius: 0 0 2px 2px;
+  background:
+    radial-gradient(circle at 84% 14%, rgba(137, 187, 57, 0.2) 0 16%, transparent 34%),
+    linear-gradient(135deg, rgba(255, 253, 247, 0.96), rgba(226, 239, 217, 0.84)),
+    rgba(243, 247, 239, 0.9);
+  box-shadow:
+    inset 0 -1px 0 rgba(7, 90, 132, 0.08),
+    0 24px 72px rgba(13, 50, 69, 0.08);
+}
+
+.grief-hero::before {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(90deg, rgba(7, 90, 132, 0.04) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(137, 187, 57, 0.04) 1px, transparent 1px);
+  background-size: 34px 34px;
+  content: "";
+  mask-image: linear-gradient(90deg, #000 0%, rgba(0, 0, 0, 0.72) 64%, transparent 100%);
+  pointer-events: none;
+}
+
+.grief-hero-copy,
+.grief-hero-card {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+}
+
+.grief-hero-copy {
+  display: grid;
+  align-content: center;
+  gap: 18px;
+  max-width: 50rem;
+}
+
+.grief-hero h1 {
+  max-width: 12ch;
+}
+
+.grief-hero-copy p:not(.eyebrow) {
+  max-width: 44rem;
+  font-size: clamp(1rem, 1.08vw, 1.08rem);
+}
+
+.grief-hero-statement {
+  padding-left: 18px;
+  border-left: 3px solid var(--leaf);
+  color: var(--ink);
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.55rem, 2vw, 2rem) !important;
+  font-weight: 500;
+  line-height: 1.16;
+}
+
+.grief-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.grief-hero-card {
+  align-self: center;
+  display: grid;
+  gap: 14px;
+  padding: clamp(24px, 3vw, 34px);
+  border: 1px solid rgba(7, 90, 132, 0.14);
+  border-top: 4px solid rgba(137, 187, 57, 0.84);
+  border-radius: 8px;
+  background:
+    linear-gradient(145deg, rgba(255, 253, 247, 0.96), rgba(226, 239, 217, 0.48)),
+    rgba(255, 253, 247, 0.9);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 253, 247, 0.92),
+    0 24px 64px rgba(13, 50, 69, 0.12);
+}
+
+.grief-hero-icon,
+.grief-host-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 999px;
+  color: var(--sage-ink);
+}
+
+.grief-hero-icon svg,
+.grief-host-icon svg {
+  width: 27px;
+  height: 27px;
+}
+
+.grief-card-label,
+.grief-week-label {
+  color: var(--leaf);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.grief-card-price {
+  color: var(--ink);
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(3.1rem, 4.6vw, 4.4rem);
+  line-height: 0.92;
+}
+
+.grief-expect-section {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.42fr) minmax(0, 1fr);
+  gap: clamp(30px, 5vw, 70px);
+  align-items: start;
+  background: rgba(255, 253, 247, 0.9);
+}
+
+.grief-section-heading {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+
+.grief-section-heading h2 {
+  max-width: 21ch;
+}
+
+.grief-expect-list {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+
+.grief-expect-item {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  gap: clamp(16px, 2.5vw, 30px);
+  align-items: start;
+  min-width: 0;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.grief-list-number {
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(7, 90, 132, 0.14);
+  border-radius: 999px;
+  background: rgba(226, 239, 217, 0.52);
+  color: var(--sage-ink);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  line-height: 1;
+}
+
+.grief-weeks-section {
+  display: grid;
+  gap: clamp(28px, 4vw, 46px);
+  background:
+    linear-gradient(180deg, rgba(226, 239, 217, 0.78), rgba(255, 253, 247, 0.9)),
+    rgba(243, 247, 239, 0.88);
+}
+
+.grief-week-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.grief-week-card {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  min-width: 0;
+  min-height: 100%;
+  padding: clamp(20px, 2.3vw, 28px);
+  border: 1px solid rgba(7, 90, 132, 0.13);
+  border-radius: 8px;
+  background:
+    linear-gradient(145deg, rgba(255, 253, 247, 0.96), rgba(226, 239, 217, 0.42)),
+    rgba(255, 253, 247, 0.9);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 253, 247, 0.92),
+    0 20px 48px rgba(13, 50, 69, 0.08);
+  transition:
+    border-color 180ms ease,
+    box-shadow 220ms ease,
+    transform 220ms var(--ease-out-soft);
+}
+
+.grief-week-card:hover {
+  border-color: rgba(7, 90, 132, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 253, 247, 0.96),
+    0 26px 60px rgba(13, 50, 69, 0.12);
+  transform: translateY(-3px);
+}
+
+.grief-week-card h3 {
+  color: var(--accent-deep);
+}
+
+.grief-week-card p:not(.grief-week-label) {
+  color: var(--sage-ink);
+  font-weight: 700;
+}
+
+.grief-investment-section {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.72fr) minmax(260px, 0.34fr);
+  gap: clamp(28px, 4vw, 56px);
+  align-items: center;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(137, 187, 57, 0.18) 0 18%, transparent 34%),
+    linear-gradient(135deg, rgba(13, 50, 69, 0.98), rgba(7, 90, 132, 0.92));
+  color: #fffdf7;
+}
+
+.grief-investment-copy {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+  max-width: 46rem;
+}
+
+.grief-investment-copy .eyebrow,
+.grief-investment-copy p,
+.grief-investment-copy a {
+  color: rgba(255, 253, 247, 0.82);
+}
+
+.grief-investment-copy h2 {
+  max-width: 22ch;
+  color: #fffdf7;
+}
+
+.grief-investment-copy .title-accent {
+  color: var(--sage);
+}
+
+.grief-investment-copy a {
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.grief-investment-actions {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+
+.grief-investment-actions .button-secondary {
+  border-color: rgba(255, 253, 247, 0.32);
+  background: rgba(255, 253, 247, 0.12);
+  color: #fffdf7;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 253, 247, 0.14),
+    0 18px 42px rgba(5, 35, 52, 0.16);
+}
+
+.grief-investment-actions .button-secondary:hover,
+.grief-investment-actions .button-secondary:focus-visible {
+  border-color: rgba(255, 253, 247, 0.48);
+  background: rgba(255, 253, 247, 0.18);
+  color: #ffffff;
+}
+
+.grief-host-section {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+  background: rgba(255, 253, 247, 0.92);
+}
+
+.grief-host-section p {
+  max-width: 54rem;
+  color: var(--ink);
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.4rem, 1.8vw, 1.85rem);
+  line-height: 1.2;
+}
+
 .session-duration {
   display: inline-flex;
   align-items: center;
@@ -1918,13 +2216,13 @@ figcaption em {
   transform: translateY(-3px);
 }
 
-.testimonial-card:nth-child(3) {
+.testimonial-card:last-child:nth-child(odd) {
   grid-column: 1 / -1;
   min-height: 0;
   padding-right: clamp(24px, 6vw, 80px);
 }
 
-.testimonial-card:nth-child(3) blockquote {
+.testimonial-card:last-child:nth-child(odd) blockquote {
   font-size: clamp(1.38rem, 1.68vw, 1.78rem);
   line-height: 1.22;
   max-width: 58rem;
@@ -2186,7 +2484,10 @@ figcaption em {
   .support-grid,
   .sessions-section,
   .payment-section,
-  .boundary-section {
+  .boundary-section,
+  .grief-hero,
+  .grief-expect-section,
+  .grief-investment-section {
     grid-template-columns: 1fr;
   }
 
@@ -2245,6 +2546,23 @@ figcaption em {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .grief-hero {
+    padding-top: 58px;
+  }
+
+  .grief-hero-card {
+    align-self: start;
+    width: min(100%, 420px);
+  }
+
+  .grief-week-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grief-investment-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .about-photo {
     align-self: start;
     justify-self: start;
@@ -2259,7 +2577,7 @@ figcaption em {
 
 }
 
-@media (max-width: 880px) {
+@media (max-width: 1230px) {
   body.nav-open {
     overflow: hidden;
   }
@@ -2442,6 +2760,19 @@ figcaption em {
   .payment-section,
   .payment-grid,
   .payment-card,
+  .grief-hero,
+  .grief-hero-copy,
+  .grief-hero-card,
+  .grief-expect-section,
+  .grief-expect-list,
+  .grief-expect-item,
+  .grief-weeks-section,
+  .grief-week-grid,
+  .grief-week-card,
+  .grief-investment-section,
+  .grief-investment-copy,
+  .grief-investment-actions,
+  .grief-host-section,
   .testimonials-grid,
   .testimonials-section,
   .support-item,
@@ -2604,6 +2935,24 @@ figcaption em {
     grid-template-columns: 1fr;
   }
 
+  .grief-week-grid,
+  .grief-investment-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .grief-expect-item {
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .grief-host-section {
+    grid-template-columns: 1fr;
+  }
+
+  .grief-hero h1 {
+    max-width: 100%;
+  }
+
   .resource-download {
     grid-template-columns: 44px minmax(0, 1fr) auto;
     padding: 16px;
@@ -2663,12 +3012,12 @@ figcaption em {
     padding: 22px 18px;
   }
 
-  .testimonial-card:nth-child(3) {
+  .testimonial-card:last-child:nth-child(odd) {
     grid-column: 1 / -1;
     padding-right: 18px;
   }
 
-  .testimonial-card:nth-child(3) blockquote {
+  .testimonial-card:last-child:nth-child(odd) blockquote {
     font-size: clamp(1.28rem, 8vw, 1.7rem);
     line-height: 1.26;
   }
