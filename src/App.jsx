@@ -125,7 +125,7 @@ const paymentOptions = [
 
 const navigatingGriefLinks = {
   application: "https://forms.gle/VguGezB2AardaaZd8",
-  discoveryCall: "https://calendar.app.google/Y4qhhxcPmCiwfF1o6",
+  connectionCall: "https://calendar.app.google/Y4qhhxcPmCiwfF1o6",
   email: "karissa@thesacredgrovecoach.com",
 };
 
@@ -924,7 +924,10 @@ export default function App() {
                   <main id="top">
                     <section className="grief-hero" data-reveal>
                       <div className="grief-hero-copy">
-                        <p className="eyebrow">Virtual small group coaching</p>
+                        <div className="grief-hero-intro">
+                          <p className="eyebrow">Virtual small group gathering</p>
+                          <p className="grief-start-date">Begins October 1, 2026</p>
+                        </div>
                         <h1>
                           Navigating{" "}
                           <span className="title-accent">Grief</span>
@@ -1014,7 +1017,7 @@ export default function App() {
                           <a href={`mailto:${navigatingGriefLinks.email}`}>
                             {navigatingGriefLinks.email}
                           </a>{" "}
-                          or set up a short discovery call.
+                          or set up a short connection call.
                         </p>
                       </div>
                       <div className="grief-investment-actions" aria-label="Navigating Grief actions">
@@ -1030,12 +1033,12 @@ export default function App() {
                         </a>
                         <a
                           className="button button-secondary"
-                          href={navigatingGriefLinks.discoveryCall}
+                          href={navigatingGriefLinks.connectionCall}
                           target="_blank"
                           rel="noreferrer"
                         >
                           <ButtonIcon icon={CalendarHeart} weight="duotone" />
-                          <span className="button-label">Set up a discovery call</span>
+                          <span className="button-label">Set up a connection call</span>
                           <ButtonIcon icon={ArrowRight} className="button-arrow" />
                         </a>
                       </div>

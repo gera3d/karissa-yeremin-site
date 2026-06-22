@@ -1581,6 +1581,24 @@ figcaption em {
   max-width: 50rem;
 }
 
+.grief-hero-intro {
+  display: grid;
+  gap: 6px;
+}
+
+.grief-hero-intro .eyebrow {
+  margin-bottom: 0;
+}
+
+.grief-start-date {
+  color: var(--sage-ink);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
 .grief-hero h1 {
   max-width: 12ch;
 }
