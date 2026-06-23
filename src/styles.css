@@ -1599,6 +1599,14 @@ figcaption em {
   text-transform: uppercase;
 }
 
+.grief-start-time {
+  color: rgba(13, 50, 69, 0.66);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.25;
+}
+
 .grief-hero h1 {
   max-width: 12ch;
 }

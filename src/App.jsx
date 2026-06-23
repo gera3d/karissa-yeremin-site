@@ -927,6 +927,7 @@ export default function App() {
                         <div className="grief-hero-intro">
                           <p className="eyebrow">Virtual small group gathering</p>
                           <p className="grief-start-date">Begins October 1, 2026</p>
+                          <p className="grief-start-time">Thursdays, 6 - 8:30pm PT</p>
                         </div>
                         <h1>
                           Navigating{" "}
@@ -953,7 +954,7 @@ export default function App() {
                       </div>
                       <aside className="grief-hero-card" aria-label="Navigating Grief details">
                         <TextIcon name="presence" className="grief-hero-icon" />
-                        <p className="grief-card-label">Founding Member Rate</p>
+                        <p className="grief-card-label">Founding Cohort Rate</p>
                         <p className="grief-card-price">$497</p>
                         <p>
                           This rate is offered for this first cohort only. Space is limited to 8 participants.
@@ -1006,7 +1007,7 @@ export default function App() {
                       <div className="grief-investment-copy">
                         <p className="eyebrow">Investment</p>
                         <h2>
-                          Founding Member Rate:{" "}
+                          Founding Cohort Rate:{" "}
                           <span className="title-accent">$497</span>
                         </h2>
                         <p>
