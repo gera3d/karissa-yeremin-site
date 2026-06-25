@@ -50,7 +50,9 @@ const bookingLinks = {
 };
 
 const paymentLinks = {
-  individualSession: import.meta.env.VITE_STRIPE_INDIVIDUAL_SESSION_LINK || "",
+  individualSession:
+    import.meta.env.VITE_STRIPE_INDIVIDUAL_SESSION_LINK ||
+    "https://buy.stripe.com/5kQcMY6zR51UeNH1lj3cc06",
   sixSessionPackage: "https://buy.stripe.com/6oU7sE7DVfGy493bZX3cc04",
   twelveSessionPackage: "https://buy.stripe.com/28E14g4rJgKC20VbZX3cc05",
   customAmount: "https://buy.stripe.com/5kQ00c4rJgKC9tnbZX3cc03",
