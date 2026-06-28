@@ -131,6 +131,13 @@ const navigatingGriefLinks = {
   email: "karissa@thesacredgrovecoach.com",
 };
 
+const navigatingGriefProgram = {
+  startDate: "Begins October 1, 2026",
+  startTime: "Thursdays, 6 - 8:30pm PT",
+  rateLabel: "Founding Cohort Rate",
+  price: "$297",
+};
+
 const griefExpectations = [
   "Six 90-minute virtual sessions, held weekly via Google Meet",
   "A small, intimate group - no more than 8 participants",
@@ -928,8 +935,8 @@ export default function App() {
                       <div className="grief-hero-copy">
                         <div className="grief-hero-intro">
                           <p className="eyebrow">Virtual small group gathering</p>
-                          <p className="grief-start-date">Begins October 1, 2026</p>
-                          <p className="grief-start-time">Thursdays, 6 - 8:30pm PT</p>
+                          <p className="grief-start-date">{navigatingGriefProgram.startDate}</p>
+                          <p className="grief-start-time">{navigatingGriefProgram.startTime}</p>
                         </div>
                         <h1>
                           Navigating{" "}
@@ -956,8 +963,8 @@ export default function App() {
                       </div>
                       <aside className="grief-hero-card" aria-label="Navigating Grief details">
                         <TextIcon name="presence" className="grief-hero-icon" />
-                        <p className="grief-card-label">Founding Cohort Rate</p>
-                        <p className="grief-card-price">$497</p>
+                        <p className="grief-card-label">{navigatingGriefProgram.rateLabel}</p>
+                        <p className="grief-card-price">{navigatingGriefProgram.price}</p>
                         <p>
                           This rate is offered for this first cohort only. Space is limited to 8 participants.
                         </p>
@@ -1009,8 +1016,8 @@ export default function App() {
                       <div className="grief-investment-copy">
                         <p className="eyebrow">Investment</p>
                         <h2>
-                          Founding Cohort Rate:{" "}
-                          <span className="title-accent">$497</span>
+                          {navigatingGriefProgram.rateLabel}:{" "}
+                          <span className="title-accent">{navigatingGriefProgram.price}</span>
                         </h2>
                         <p>
                           This rate is offered for this first cohort only. Space is limited to 8 participants &mdash; apply to reserve your spot.
