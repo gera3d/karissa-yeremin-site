@@ -2281,6 +2281,8 @@ figcaption em {
 .testimonial-card blockquote {
   position: relative;
   z-index: 1;
+  display: grid;
+  gap: clamp(14px, 1.4vw, 20px);
   color: var(--ink);
   font-size: clamp(1.28rem, 1.34vw, 1.52rem);
   line-height: 1.28;

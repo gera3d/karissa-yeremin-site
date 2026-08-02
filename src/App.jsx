@@ -133,14 +133,14 @@ const navigatingGriefLinks = {
 
 const navigatingGriefProgram = {
   startDate: "Begins October 1, 2026",
-  startTime: "Thursdays, 6 - 8:30pm PT",
+  startTime: "Thursdays, 6–8:30 p.m. PT",
   rateLabel: "Founding Cohort Rate",
   price: "$297",
 };
 
 const griefExpectations = [
   "Six 90-minute virtual sessions, held weekly via Google Meet",
-  "A small, intimate group - no more than 8 participants",
+  "A small, intimate group—no more than 8 participants",
   "A guided participant workbook with weekly reflections, exercises, and journal space",
   "A space rooted in compassion, confidentiality, and zero pressure to be “further along” than you are",
   "Between-session support via email for brief questions or reflections",
@@ -274,6 +274,33 @@ const testimonials = [
     name: "Mary",
     date: "June 5, 2026",
     dateTime: "2026-06-05",
+  },
+  {
+    takeaway: "Compassion turned into action",
+    paragraphs: [
+      <>
+        Karissa is the kind of coach every woman needs in her corner. She leads with heart, and her
+        compassion isn't just something she teaches—it’s something she lives. As a Black woman, a
+        mother, someone who has navigated divorce and co-parenting, built a new relationship, and
+        grown a business all at once, Karissa brings a{" "}
+        <strong className="testimonial-emphasis">depth of lived experience</strong> that makes her
+        coaching{" "}
+        <strong className="testimonial-emphasis">real, grounded, and deeply relatable</strong>.
+      </>,
+      <>
+        She listens with her whole heart, holding space fully—and then she helps you turn what
+        you’re feeling into an{" "}
+        <strong className="testimonial-emphasis">actual plan you can act on</strong>. Working with
+        Karissa as my peer coach didn’t just help me feel understood,{" "}
+        <strong className="testimonial-emphasis">it moved me forward</strong>. She has a gift for
+        helping you see exactly where you want to go, and then walking with you, step by step, until
+        you get there.
+      </>,
+    ],
+    name: "Anonymous",
+    context: "Peer coaching testimonial",
+    date: "July 20, 2026",
+    dateTime: "2026-07-20",
   },
 ];
 
@@ -785,7 +812,7 @@ export default function App() {
 
           <section className="section testimonials-section" id="testimonials" data-reveal>
             <div className="testimonials-heading">
-              <p className="eyebrow">Real client words</p>
+              <p className="eyebrow">Words from people Karissa has coached</p>
               <h2>
                 People leave feeling{" "}
                 <span className="title-accent">
@@ -805,12 +832,16 @@ export default function App() {
                   <span className="testimonial-number">0{index + 1}</span>
                   <p className="testimonial-takeaway">{testimonial.takeaway}</p>
                   <blockquote>
-                    <p>{testimonial.quote}</p>
+                    {testimonial.paragraphs?.map((paragraph, paragraphIndex) => (
+                      <p key={`${testimonial.dateTime}-paragraph-${paragraphIndex}`}>
+                        {paragraph}
+                      </p>
+                    )) ?? <p>{testimonial.quote}</p>}
                   </blockquote>
                   <figcaption>
                     <span>
                       <strong>{testimonial.name}</strong>
-                      <span>Dated client note</span>
+                      <span>{testimonial.context ?? "Dated client note"}</span>
                     </span>
                     <time dateTime={testimonial.dateTime}>{testimonial.date}</time>
                   </figcaption>
@@ -946,7 +977,7 @@ export default function App() {
                           Navigating Grief is a six-week virtual small group coaching experience for anyone carrying a loss the world doesn’t always recognize &mdash; divorce, estrangement, chronic illness, a faith that no longer fits, a friendship that faded, a version of yourself you’ve had to let go of.
                         </p>
                         <p className="grief-hero-statement">
-                          If you’ve ever wondered whether your grief “counts” &ndash; it does. And this is a space built specifically for it.
+                          If you’ve ever wondered whether your grief “counts”&mdash;it does. And this is a space built specifically for it.
                         </p>
                         <div className="grief-hero-actions">
                           <a
